@@ -7,7 +7,7 @@ Personality profiling in computing matches a person's traits with the right jobs
 
 ### Member 1 - IT21207204 - Weerakoon N.P(NethishaWeerakoon)/ Component 1 - Tailor learning experiences to align with user preferences, learning styles, and adaptive progress pathways.
 ### Member 2 - IT21216114 - Wanigasooriya R.K(RenujaWanigasooriya)/Component 2- Automating job flyer generation, candidate shortlisting, and interview video emotions analysis.
-### Member 3 - IT21212536 - De Silva K.A(IT21212536)/Component 3 - Create personalized CVs and job recommendations.
+### Member 3 - IT21212536 - De Silva K.A(Kavishka Ashan De Silva)/Component 3 - Create personalized CVs and job recommendations.
 ### Member 4 - IT21214066 - Perera M.M.P(Malidu04)Component 4- Personality prediction. 
 
 
