@@ -21,3 +21,26 @@ Personality profiling for career recommendation in computing involves assessing 
 # Dependencies
 
 #### List of Dependencies
+#### Component 1-
+OpenAI - Provides APIs for generating text, images, or other outputs using AI.
+pydantic - A Python library for data validation and settings management. 
+SQLlite - Useful for storing, retrieving, and managing data without requiring a full database server.
+tempfile - A standard Python library for creating and managing temporary files and directories.
+shutil - Provides functions for copying, moving, renaming, and deleting files or entire directorie.
+
+#### Component 2-
+Mediapipe - A library for computer vision tasks like face detection, hand tracking, and pose estimation.
+cv2 - Used for tasks like object detection, image transformations, and camera calibration.
+pandas - Provides tools for working with structured data.
+os - Helps with file handling, directory navigation, and environment management.
+numpy - Provides support for arrays and mathematical operations like matrix multiplication.
+
+#### Component 3-
+Openai - Provides APIs for generating text, images, or other outputs using AI.
+Chromadb - Used to store and retrieve AI-generated embeddings ( from text, images, or audio) efficiently.
+
+#### Component 4-
+pandas - A library for data manipulation and analysis.
+numpy - A library for numerical computing.
+torch - Used for tasks like neural network development and GPU-accelerated computations.
+
