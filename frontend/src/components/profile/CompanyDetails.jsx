@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Loading from "../Loading";
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
+
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#A28DFF"];
 
 const CompanyDetails = () => {
   const [employeeDetails, setEmployeeDetails] = useState([]);
@@ -10,11 +13,8 @@ const CompanyDetails = () => {
   useEffect(() => {
     const fetchEmployeeDetails = async () => {
       try {
-        // Fetch employee details from the API
         const response = await axios.get(
-          `${import.meta.env.VITE_API_BASE_URL}employee/get-employee-details/${
-            user._id
-          }`
+          `${import.meta.env.VITE_API_BASE_URL}employee/get-employee-details/${user._id}`
         );
         setEmployeeDetails(response.data.data);
       } catch (err) {
@@ -27,18 +27,6 @@ const CompanyDetails = () => {
     fetchEmployeeDetails();
   }, [user._id]);
 
-  // Function to format personality levels for better readability
-  const formatPersonalityLevels = (personalityLevel) => {
-    return (
-      Object.entries(personalityLevel)
-        .map(
-          ([key, value]) => `${key}: ${(parseFloat(value) * 100).toFixed(0)}%`
-        )
-        .join(", ") || "N/A"
-    );
-  };
-
-  // Display loading indicator while fetching data
   if (loading) {
     return (
       <div>
@@ -54,48 +42,78 @@ const CompanyDetails = () => {
         Employee Details
       </h1>
 
-      {/* Conditionally render table or message if no data is available */}
       {employeeDetails.length > 0 ? (
-        <div className="overflow-x-auto">
-          <table className="table-auto w-full border-collapse border border-gray-300">
-            <thead>
-              <tr className="bg-gray-100">
-                <th className="px-4 py-2 border border-gray-300 text-left text-gray-600 font-semibold">
-                  Position
-                </th>
-                <th className="px-4 py-2 border border-gray-300 text-left text-gray-600 font-semibold">
-                  Registration Number
-                </th>
-                <th className="px-4 py-2 border border-gray-300 text-left text-gray-600 font-semibold">
-                  Company Name
-                </th>
-                <th className="px-4 py-2 border border-gray-300 text-left text-gray-600 font-semibold">
-                  Employment Personality Levels
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {employeeDetails.map((employee) => (
-                <tr key={employee._id} className="odd:bg-white even:bg-gray-50">
-                  <td className="px-4 py-2 border border-gray-300 text-left">
-                    {employee.position}
-                  </td>
-                  <td className="px-4 py-2 border border-gray-300 text-left">
-                    {employee.registrationNumber}
-                  </td>
-                  <td className="px-4 py-2 border border-gray-300 text-left">
-                    {employee.companyName}
-                  </td>
-                  <td className="px-4 py-2 border border-gray-300 text-left">
-                    {formatPersonalityLevels(employee.employeePersonalityLevel)}
-                  </td>
+        <div>
+          <div className="overflow-x-auto mb-8">
+            <table className="table-auto w-full border-collapse border border-gray-300">
+              <thead>
+                <tr className="bg-gray-100">
+                  <th className="px-4 py-2 border border-gray-300 text-left text-gray-600 font-semibold">
+                    Employee Name
+                  </th>
+                  <th className="px-4 py-2 border border-gray-300 text-left text-gray-600 font-semibold">
+                    Position
+                  </th>
+                  <th className="px-4 py-2 border border-gray-300 text-left text-gray-600 font-semibold">
+                    Registration Number
+                  </th>
+                  <th className="px-4 py-2 border border-gray-300 text-left text-gray-600 font-semibold">
+                    Company Name
+                  </th>
+                  <th className="px-4 py-2 border border-gray-300 text-left text-gray-600 font-semibold">
+                    Company Email
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {employeeDetails.map((employee) => (
+                  <tr key={employee._id} className="odd:bg-white even:bg-gray-50">
+                    <td className="px-4 py-2 border border-gray-300 text-left">
+                      {employee.userId.fullName}
+                    </td>
+                    <td className="px-4 py-2 border border-gray-300 text-left">
+                      {employee.position}
+                    </td>
+                    <td className="px-4 py-2 border border-gray-300 text-left">
+                      {employee.registrationNumber}
+                    </td>
+                    <td className="px-4 py-2 border border-gray-300 text-left">
+                      {employee.companyName}
+                    </td>
+                    <td className="px-4 py-2 border border-gray-300 text-left">
+                      {employee.companyEmail}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          
+          <div className="flex justify-center">
+            <ResponsiveContainer width={400} height={400}>
+              <PieChart>
+                <Pie
+                  data={Object.entries(employeeDetails[0].employeePersonalityLevel).map(([key, value]) => ({
+                    name: key,
+                    value: parseFloat(value) * 100,
+                  }))}
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={120}
+                  fill="#8884d8"
+                  dataKey="value"
+                >
+                  {Object.keys(employeeDetails[0].employeePersonalityLevel).map((_, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip formatter={(value) => `${value.toFixed(0)}%`} />
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
         </div>
       ) : (
-        // Display message if no employee details are available
         <div className="text-center text-gray-600 mt-4">
           <p>You have no employee details.</p>
         </div>
