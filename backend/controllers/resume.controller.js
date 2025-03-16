@@ -9,7 +9,7 @@ const User = require("../models/user.model");
 const Job = require("../models/job.model");
 const backendUrl = process.env.FLASH_BACKEND;
 
-// Configure AWS S3
+// Configure AWS S3 
 
 // Create resume for user using PDF
 const createResumeUsingPDF = async (req, res) => {
