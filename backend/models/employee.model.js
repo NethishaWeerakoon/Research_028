@@ -11,9 +11,6 @@ let employeeDetailsSchema = new Schema(
     employeeName: {
       type: String,
     },
-    employeeQualities: {
-      type: String,
-    },
     position: {
       type: String,
     },
@@ -26,10 +23,39 @@ let employeeDetailsSchema = new Schema(
     companyName: {
       type: String,
     },
+    companyPhone: {
+      type: String,
+    },
+    companyAddress: {
+      type: String,
+    },
+    hrContactName: {
+      type: String,
+    },
+    hrContactEmail: {
+      type: String,
+    },
+    employmentStartDate: {
+      type: Date,
+      required: true,
+    },
+    employmentEndDate: {
+      type: Date,
+      required: true,
+    },
     employeePersonalityLevel: {
       type: Map,
       of: String,
       default: {},
+    },
+    workProject: {
+      type: String,
+    },
+    projectDescription: {
+      type: String,
+    },
+    howWorkedOnProject: {
+      type: String,
     },
   },
   {
