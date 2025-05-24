@@ -11,7 +11,9 @@ const CompanyResponseForm = () => {
   const [formData, setFormData] = useState({
     employeeName: "",
     jobTitle: "",
-    employeeQualities: "",
+    workProject: "",
+    projectDescription: "",
+    howWorkedOnProject: "",
   });
 
   useEffect(() => {
@@ -19,22 +21,24 @@ const CompanyResponseForm = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_BASE_URL}employee/get-employee-details/${userId}`
+          `${
+            import.meta.env.VITE_API_BASE_URL
+          }employee/get-employee-details/${userId}`
         );
-        const employeeData = response.data.data[0]; 
+        const employeeData = response.data.data[0];
 
         if (employeeData) {
           setFormData({
             employeeName: employeeData.userId.fullName || "",
-            jobTitle: employeeData.position || "", 
-            employeeQualities: "", 
+            jobTitle: employeeData.position || ""
           });
         }
       } catch (err) {
         Swal.fire({
           icon: "error",
           title: "Error!",
-          text: err.response?.data?.message || "Error fetching employee details.",
+          text:
+            err.response?.data?.message || "Error fetching employee details.",
           confirmButtonText: "OK",
           confirmButtonColor: "red",
         });
@@ -48,7 +52,8 @@ const CompanyResponseForm = () => {
 
   // Handle changes to the employeeQualities field only
   const handleChange = (e) => {
-    setFormData((prev) => ({ ...prev, employeeQualities: e.target.value }));
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   // Handle form submission
@@ -62,7 +67,9 @@ const CompanyResponseForm = () => {
         `${import.meta.env.VITE_API_BASE_URL}employee/update-employee-details`,
         {
           userId,
-          employeeQualities: formData.employeeQualities,
+          workProject: formData.workProject,
+          projectDescription: formData.projectDescription,
+          howWorkedOnProject: formData.howWorkedOnProject,
         },
         {
           headers: {
@@ -71,6 +78,7 @@ const CompanyResponseForm = () => {
           },
         }
       );
+
       Swal.fire({
         icon: "success",
         title: "Success!",
@@ -141,16 +149,48 @@ const CompanyResponseForm = () => {
             />
           </div>
 
-          {/* Employee Qualities (Editable) */}
+          {/* Work Project */}
           <div>
-            <label className="block text-gray-600 mb-1">Employee Qualities</label>
-            <textarea
-              name="employeeQualities"
-              value={formData.employeeQualities}
+            <label className="block text-gray-600 mb-1">Work Project</label>
+            <input
+              type="text"
+              name="workProject"
+              value={formData.workProject}
               onChange={handleChange}
-              placeholder="Describe the employee qualities"
+              placeholder="Name of the project"
               className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
-              rows="4"
+              required
+            />
+          </div>
+
+          {/* Project Description */}
+          <div>
+            <label className="block text-gray-600 mb-1">
+              Project Description
+            </label>
+            <textarea
+              name="projectDescription"
+              value={formData.projectDescription}
+              onChange={handleChange}
+              placeholder="Describe the project"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+
+          {/* How Worked on Project */}
+          <div>
+            <label className="block text-gray-600 mb-1">
+              How Did the Employee Work on the Project?
+            </label>
+            <textarea
+              name="howWorkedOnProject"
+              value={formData.howWorkedOnProject}
+              onChange={handleChange}
+              placeholder="Describe the employee's contribution"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
+              rows="3"
               required
             ></textarea>
           </div>
