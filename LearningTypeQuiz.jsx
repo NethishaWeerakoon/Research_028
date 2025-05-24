@@ -18,7 +18,6 @@ const LearningTypeQuiz = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
-  // Fetch questions when the component mounts
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
