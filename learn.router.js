@@ -6,7 +6,7 @@ const authenticateUser = require("../middleware/authMiddleware");
 // Save Type and Points
 router.post("/learning-type", authenticateUser, learnController.saveLearningType);
 
-// Update Learning Type and Points
+// Update  Type and Points
 router.put("/update-learning-type", authenticateUser, learnController.updateLearningType);
 
 // Submit quiz answer
