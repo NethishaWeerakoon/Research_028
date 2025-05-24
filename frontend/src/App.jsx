@@ -33,7 +33,10 @@ import Reference from "./pages/learning/Reference";
 import ProtectedRoute from "./components/public/ProtectedRoute";
 import Home from "./pages/home/Home";
 import ApplicantRecommended from "./pages/applicant/ApplicantRecommended";
+import Quiz from "./pages/learning/quiz";
+import PredictPersonality from "./pages/learning/PredictPersonality";
 
+ 
 function Layout() {
   const location = useLocation();
   const hideHeaderFooter = ["/sign-in", "/sign-up"].includes(location.pathname);
@@ -48,6 +51,7 @@ function Layout() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/my-profile" element={<MyProfile />} />
         <Route path="/company-response/:userId" element={<CompanyResponseForm />} />
+        <Route path="/learning-progress" element={<LearningProgress />} />
       
         {/* Protected Job Seeker Routes */}
         <Route element={<ProtectedRoute allowedRoles={["Job Seeker"]} />}>
@@ -65,10 +69,11 @@ function Layout() {
           <Route path="/learning-type" element={<LearningType />} />
           <Route path="/reference" element={<Reference />} />
           <Route path="/topic-select" element={<TopicSelect />} />
-          <Route path="/personality-type-quiz" element={<PersonalityQuiz />} />
-          <Route path="/learning-progress" element={<LearningProgress />} />
+          <Route path="/personality-test" element={<PersonalityQuiz />} />
           <Route path="/company-details" element={<CompanyDetailsForm />} />
           <Route path="/video-upload/:jobId" element={<VideoUpload />} />
+          <Route path="/personality-quiz" element={<Quiz />} />
+          <Route path="/personality-category" element={<PredictPersonality />} />
         </Route>
 
         {/* Protected Recruiter Routes */}
