@@ -39,7 +39,7 @@ let employeeDetailsSchema = new Schema(
       type: Date,
       required: true,
     },
-    employmentEndDate: {
+    employmentEndDate: { 
       type: Date,
       required: true,
     },
