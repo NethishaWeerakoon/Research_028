@@ -6,7 +6,7 @@ import axios from "axios";
 const TopicSelect = () => {
   const [selectedTopic, setSelectedTopic] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedCard, setSelectedCard] = useState(null); // State to track selected card
+  const [selectedCard, setSelectedCard] = useState(null);
   const navigate = useNavigate();
 
   // Predefined list of tutorial topics to select from
