@@ -29,7 +29,7 @@ const QuizResults = () => {
     if (!filename) return "";
     return filename.replace(".pdf", "").replace(/_/g, " ");
   };
-
+//learning type verify
   const getLearningTypeFromPoints = (points) => {
     if (points >= 80) return "Speed Type Learner";
     if (points >= 50) return "Medium Type Learner";
