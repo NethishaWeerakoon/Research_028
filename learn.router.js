@@ -3,7 +3,7 @@ const router = express.Router();
 const learnController = require("../controllers/learn.controller");
 const authenticateUser = require("../middleware/authMiddleware");
 
-// Save Learning Type and Points
+// Save Type and Points
 router.post("/learning-type", authenticateUser, learnController.saveLearningType);
 
 // Update Learning Type and Points
