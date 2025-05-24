@@ -11,7 +11,7 @@ export default function Home() {
     const user = JSON.parse(localStorage.getItem("user"));
 
     if (user?.roleType === "Recruiter") {
-      navigate("/my-jobs"); // Redirect recruiters to "My Jobs" page
+      navigate("/my-jobs");
     } else if (user?.roleType === "Job Seeker") {
       navigate("/resume"); // Redirect job seekers to "Resume" page
     } else {
