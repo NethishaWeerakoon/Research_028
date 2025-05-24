@@ -176,7 +176,7 @@ export default function Learning() {
               </div>
             </motion.div>
 
-            {/* Step 3: View Profile */}
+           
             <motion.div
               className="bg-white p-6 rounded-lg shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300"
               variants={fadeInUp}
