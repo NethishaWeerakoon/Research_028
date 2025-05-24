@@ -122,7 +122,7 @@ const Reference = () => {
     }
   }, []);
 
-  // Data for the bar chart (correct answers vs wrong answers)
+  // Data for the bar chart
   const chartData = quizData
     ? [
         { name: "Correct Answers", value: quizData.correctAnswers },
