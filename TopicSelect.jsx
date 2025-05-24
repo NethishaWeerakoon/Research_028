@@ -9,7 +9,7 @@ const TopicSelect = () => {
   const [selectedCard, setSelectedCard] = useState(null);
   const navigate = useNavigate();
 
-  // Predefined list of tutorial topics to select from
+  // Predefined list of tutorial topics
   const topics = [
     { name: "Java", description: "Versatile programming language for building large-scale apps.", color: "bg-red-100" },
     { name: "Python", description: "Great for data science, machine learning, and web development.", color: "bg-blue-100" },
