@@ -267,7 +267,7 @@ const LearningTypeQuiz = () => {
               </ul>
             </div>
           </div>
-//add buttons
+//add button
           <div className="flex justify-between mt-6">
             <button
               onClick={goToPreviousQuestion}
