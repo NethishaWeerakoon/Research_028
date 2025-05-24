@@ -11,4 +11,4 @@ router.put("/update-employee-details", employeeController.updateEmployeeDetails)
 // Get employee details by userId route
 router.get("/get-employee-details/:userId", employeeController.getEmployeeDetails);
 
-module.exports = router;
+module.exports = router; 
