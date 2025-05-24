@@ -7,9 +7,9 @@ import { FaSearch, FaFilter, FaSort, FaTrophy } from "react-icons/fa";
 
 // Function to return appropriate badge based on the index (medals)
 const getBadge = (index) => {
-  if (index === 0) return "🥇"; // Gold Medal
-  if (index === 1) return "🥈"; // Silver Medal
-  if (index === 2) return "🥉"; // Bronze Medal
+  if (index === 0) return "🥇"; 
+  if (index === 1) return "🥈";
+  if (index === 2) return "🥉"; 
   return "";
 };
 
@@ -256,6 +256,8 @@ const LearningProgress = () => {
                       style={{ width: `${item.score}%` }}
                     ></div>
                   </div>
+
+                  //profile changes
                 </td>
                 <td className="py-3 px-4">{item.correctAnswers}</td>
                 <td className="py-3 px-4">{item.totalQuestions}</td>
