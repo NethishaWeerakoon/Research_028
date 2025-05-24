@@ -11,10 +11,17 @@ const CompanyDetailsForm = () => {
 
   const [formData, setFormData] = useState({
     userId: userId || "",
+    employeeName: "",
     companyName: "",
     companyEmail: "",
+    companyPhone: "",
+    companyAddress: "",
+    hrContactName: "",
+    hrContactEmail: "",
     registrationNumber: "",
     position: "",
+    employmentStartDate: "",
+    employmentEndDate: "",
   });
 
   // Update formData as user types
@@ -46,10 +53,17 @@ const CompanyDetailsForm = () => {
       });
       setFormData({
         userId: userId || "",
+        employeeName: "",
         companyName: "",
         companyEmail: "",
+        companyPhone: "",
+        companyAddress: "",
+        hrContactName: "",
+        hrContactEmail: "",
         registrationNumber: "",
         position: "",
+        employmentStartDate: "",
+        employmentEndDate: "",
       });
     } catch (err) {
       const errorMessage =
@@ -81,13 +95,13 @@ const CompanyDetailsForm = () => {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center bg-cover bg-center"
+      className="min-h-screen flex items-center justify-center bg-cover bg-center py-8"
       style={{
         backgroundImage: `url(${background})`,
       }}
     >
       {/* Main Container */}
-      <div className="bg-white bg-opacity-90 p-8 rounded-md shadow-lg w-3/4 md:w-2/3 lg:w-1/2">
+      <div className="bg-white bg-opacity-90 p-8 rounded-md shadow-lg w-3/4 md:w-2/3 lg:w-1/2 ">
         {/* Title */}
         <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
           Company Details
@@ -97,19 +111,26 @@ const CompanyDetailsForm = () => {
         <form className="space-y-4" onSubmit={handleSubmit}>
           {/* Input Fields */}
           {[
+            { label: "Employee Name", name: "employeeName" },
             { label: "Company Name", name: "companyName" },
             { label: "Company Email", name: "companyEmail" },
+            { label: "Company Phone", name: "companyPhone" },
+            { label: "Company Address", name: "companyAddress" },
+            { label: "HR Contact Name", name: "hrContactName" },
+            { label: "HR Contact Email", name: "hrContactEmail" },
             { label: "Registration Number", name: "registrationNumber" },
             { label: "Position", name: "position" },
+            { label: "Employment Start Date", name: "employmentStartDate", type: "date" },
+            { label: "Employment End Date", name: "employmentEndDate", type: "date" },
           ].map((field, index) => (
             <div key={index}>
               <label className="block text-gray-600 mb-1">{field.label}</label>
               <input
-                type="text"
+                type={field.type || "text"}
                 name={field.name}
                 value={formData[field.name]}
                 onChange={handleChange}
-                placeholder="Enter here"
+                placeholder={field.type === "date" ? "" : "Enter here"}
                 className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
                 required
               />
