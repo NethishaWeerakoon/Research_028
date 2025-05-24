@@ -61,7 +61,7 @@ const PersonalityQuiz = () => {
           headers: {
             "Content-Type": "application/json",
           },
-        }
+        } 
       );
 
       // Show success message after successfully updating the personality text
