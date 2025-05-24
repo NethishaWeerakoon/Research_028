@@ -3,7 +3,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Loading from "../Loading";
 import UploadResumeDialog from "./UploadResume";
-import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import {
+  PieChart as MuiPieChart,
+  pieArcLabelClasses,
+} from '@mui/x-charts/PieChart';
+
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#A28CFE", "#FF6699"];
 
 const ResumeDetails = () => {
   const [resumes, setResumes] = useState([]);
@@ -11,7 +16,6 @@ const ResumeDetails = () => {
   const [uploading, setUploading] = useState(false);
   const [message, setMessage] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [personalityData, setPersonalityData] = useState([]);
 
   const user = JSON.parse(localStorage.getItem("user"));
   const token = localStorage.getItem("token");
@@ -28,24 +32,11 @@ const ResumeDetails = () => {
         `${import.meta.env.VITE_API_BASE_URL}resumes/${userId}`
       );
       setResumes(response.data.resumes);
-      processPersonalityData(response.data.resumes);
     } catch (err) {
       console.error("Error fetching resumes:", err);
     } finally {
       setLoading(false);
     }
-  };
-
-  const processPersonalityData = (resumes) => {
-    if (resumes.length === 0) return;
-    
-    const personalityLevels = resumes[0].personalityLevel;
-    const data = Object.entries(personalityLevels).map(([key, value]) => ({
-      name: key,
-      value: parseFloat(value) * 100,
-    }));
-
-    setPersonalityData(data);
   };
 
   const handleDialogSubmit = async ({ file, experienceYears }) => {
@@ -66,8 +57,9 @@ const ResumeDetails = () => {
           },
         }
       );
+      console.log("Response from createResumeUsingPDF:", response.data);
       setMessage(response.data.message);
-      fetchResumes();
+      fetchResumes(); // Refresh resume list after upload
     } catch (error) {
       console.error("Error uploading resume:", error);
       alert(
@@ -79,6 +71,18 @@ const ResumeDetails = () => {
     }
   };
 
+  const getPieChartData = () => {
+    if (resumes.length === 0) return [];
+    const latestResume = resumes[0]; // use latest resume
+    const personality = latestResume?.personalityLevel || {};
+    return Object.entries(personality).map(([key, value]) => ({
+      name: key,
+      value: parseFloat(value) * 100,
+    }));
+  };
+
+  const pieChartData = getPieChartData();
+
   if (loading) {
     return (
       <div>
@@ -88,11 +92,11 @@ const ResumeDetails = () => {
     );
   }
 
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#A28DFF"];
-
   return (
     <div className="bg-white shadow-md rounded-lg p-8 w-full mb-6">
-      <h1 className="text-3xl font-bold text-center text-blue-600 ">My Profile</h1>
+      <h1 className="text-3xl font-bold text-center text-blue-600">
+        My Profile
+      </h1>
 
       <div className="flex justify-end mb-6">
         <button
@@ -116,22 +120,36 @@ const ResumeDetails = () => {
         <table className="table-auto w-full border-collapse border border-gray-300">
           <thead>
             <tr className="bg-gray-100">
-              <th className="px-4 py-2 border border-gray-300 text-left text-gray-600 font-semibold">Full Name</th>
-              <th className="px-4 py-2 border border-gray-300 text-left text-gray-600 font-semibold">Email</th>
-              <th className="px-4 py-2 border border-gray-300 text-left text-gray-600 font-semibold">Experience (Years)</th>
-              <th className="px-4 py-2 border border-gray-300 text-left text-gray-600 font-semibold">CV Link</th>
+              <th className="px-4 py-2 border border-gray-300 text-left text-gray-600 font-semibold">
+                Full Name
+              </th>
+              <th className="px-4 py-2 border border-gray-300 text-left text-gray-600 font-semibold">
+                Email
+              </th>
+              <th className="px-4 py-2 border border-gray-300 text-left text-gray-600 font-semibold">
+                Experience (Years)
+              </th>
+              <th className="px-4 py-2 border border-gray-300 text-left text-gray-600 font-semibold">
+                CV Link
+              </th>
             </tr>
           </thead>
           <tbody>
             {resumes.map((resume) => (
               <tr key={resume._id} className="odd:bg-white even:bg-gray-50">
-                <td className="px-4 py-2 border border-gray-300 text-left">{resume.userId.fullName}</td>
-                <td className="px-4 py-2 border border-gray-300 text-left">{resume.userId.email}</td>
-                <td className="px-4 py-2 border border-gray-300 text-left">{resume.experienceYears}</td>
                 <td className="px-4 py-2 border border-gray-300 text-left">
-                  {resume.s3CVLink ? (
+                  {resume.userId.fullName}
+                </td>
+                <td className="px-4 py-2 border border-gray-300 text-left">
+                  {resume.userId.email}
+                </td>
+                <td className="px-4 py-2 border border-gray-300 text-left">
+                  {resume.experienceYears}
+                </td>
+                <td className="px-4 py-2 border border-gray-300 text-left">
+                  {resume.filename ? (
                     <a
-                      href={resume.s3CVLink}
+                      href={resume.filename}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 underline"
@@ -148,28 +166,38 @@ const ResumeDetails = () => {
         </table>
       </div>
 
-      {personalityData.length > 0 && (
-        <div className="mt-8 flex flex-col items-center">
-          <h2 className="text-2xl font-bold mb-4 text-blue-600">Personality Distribution</h2>
-          <ResponsiveContainer width={400} height={400}>
-            <PieChart>
-              <Pie
-                data={personalityData}
-                cx="50%"
-                cy="50%"
-                outerRadius={120}
-                fill="#8884d8"
-                dataKey="value"
-                label
-              >
-                {personalityData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip />
-              <Legend />
-            </PieChart>
-          </ResponsiveContainer>
+      {pieChartData.length > 0 && (
+        <div className="w-full flex justify-center mt-10">
+          <div>
+            <h2 className="text-xl font-semibold text-gray-700 text-center mb-4">
+              Personality Distribution (Latest Resume)
+            </h2>
+            <MuiPieChart
+              series={[{
+                data: pieChartData.map((item, index) => ({
+                  id: index,
+                  value: item.value,
+                  label: item.name,
+                  color: COLORS[index % COLORS.length],
+                })),
+                highlightScope: { fade: 'global', highlight: 'item' },
+                faded: {
+                  innerRadius: 30,
+                  additionalRadius: -20,
+                  color: 'gray',
+                },
+                arcLabel: (item) => `${item.label}: ${item.value.toFixed(0)}%`,
+              }]}
+              height={300}
+              width={400}
+              sx={{
+                [`& .${pieArcLabelClasses.root}`]: {
+                  fill: '#333',
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+          </div>
         </div>
       )}
     </div>
