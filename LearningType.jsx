@@ -279,7 +279,7 @@ const LearningType = () => {
               </motion.div>
             </AnimatePresence>
 
-            {/* Navigation Buttons */}
+            {/* Navigation */}
             <div className="flex justify-between">
               {currentQuestion > 0 && (
                 <button
