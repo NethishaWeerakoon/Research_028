@@ -3,7 +3,7 @@ const axios = require("axios");
 const Learn = require("../models/learn.model");
 const backendUrl = process.env.FLASH_BACKEND;
 
-// Save Learning Type and Points
+// Save Learning Type 
 const saveLearningType = async (req, res) => {
   const { userId, learningType, learningTypePoints } = req.body;
   if (!userId || !learningType || learningTypePoints === undefined) {
