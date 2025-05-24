@@ -12,7 +12,7 @@ router.put("/update-learning-type", authenticateUser, learnController.updateLear
 // Submit quiz answer
 router.put("/submit-quiz", authenticateUser, learnController.submitQuiz);
 
-// Get quiz results (aggregated)
+// Get quiz results 
 router.get("/get-quiz-results", authenticateUser, learnController.getQuizResults);
 
 // Get quiz results for a specific user
