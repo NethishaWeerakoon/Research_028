@@ -20,7 +20,7 @@ const TopicSelect = () => {
     { name: "HTML", description: "Fundamental for creating web pages and applications.", color: "bg-indigo-100" },
   ];
 
-  // Function to handle the filename update and navigation to quiz page
+  // Function to handle the filename update
   const handleUpdateFilename = async () => {
     if (!selectedTopic) {
       return Swal.fire({
