@@ -1,8 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "tailwindcss/tailwind.css"; // Ensure Tailwind CSS is correctly configured
-import "animate.css"; // Importing animate.css for animations
-
+import "animate.css"; 
 export default function Home() {
   const navigate = useNavigate();
 
