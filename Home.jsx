@@ -21,7 +21,7 @@ export default function Home() {
 
   return (
     <div className="bg-gradient-to-br from-purple-50 to-indigo-50 min-h-screen">
-      {/* Hero Section */}
+   
       <div
         className="text-white text-center py-20 px-4 animate__animated animate__fadeIn animate__duration-500 bg-gradient-to-r from-purple-400 to-indigo-500"
         style={{
