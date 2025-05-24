@@ -122,7 +122,7 @@ const submitQuiz = async (req, res) => {
   }
 };
 
-// Get Quiz Results for All Users (Aggregated)
+// Get Quiz Results for All Users 
 const getQuizResults = async (req, res) => {
   try {
     const results = await Learn.aggregate([
