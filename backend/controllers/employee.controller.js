@@ -3,35 +3,53 @@ const EmployeeDetails = require("../models/employee.model");
 const nodemailer = require("nodemailer");
 const axios = require("axios");
 
-const emailpassword = process.env.EMAIL_PASSWORD;
-const backendUrl = process.env.FLASH_BACKEND;
-
 // Add employee details
 const addEmployeeDetails = async (req, res) => {
   try {
-    const { userId, companyName, companyEmail, registrationNumber, position } =
+    console.log("Received request to add employee details.");
+    const { userId,
+      employeeName,
+      companyName,
+      companyEmail,
+      companyPhone,
+      companyAddress,
+      hrContactName,
+      hrContactEmail,
+      registrationNumber,
+      position,
+      employmentStartDate,
+      employmentEndDate } =
       req.body;
+
+    console.log("Request body:", req.body);
 
     // Validation check
     if (
       !userId ||
+      !employeeName ||
       !companyName ||
       !companyEmail ||
       !registrationNumber ||
-      !position
+      !position ||
+      !employmentStartDate ||
+      !employmentEndDate 
     ) {
+      console.log("Validation failed: Missing required fields.");
       return res.status(400).json({ message: "All fields are required." });
     }
 
     // Check if user exists
     const user = await User.findById(userId);
     if (!user) {
+      console.log(`User not found with ID: ${userId}`);
       return res.status(404).json({ message: "User not found." });
     }
+    console.log("User found:", user.email);
 
     // Check if user already has an employee details form
     const existingEmployeeDetails = await EmployeeDetails.findOne({ userId });
     if (existingEmployeeDetails) {
+      console.log("Employee details form already exists for this user.");
       return res
         .status(400)
         .json({ message: "You cannot add multiple forms." });
@@ -40,31 +58,48 @@ const addEmployeeDetails = async (req, res) => {
     // Save employee details
     const employeeDetails = new EmployeeDetails({
       userId,
+      employeeName,
       companyName,
       companyEmail,
+      companyPhone,
+      companyAddress,
+      hrContactName,
+      hrContactEmail,
       registrationNumber,
       position,
+      employmentStartDate,
+      employmentEndDate
     });
 
     const savedDetails = await employeeDetails.save();
+    console.log("Employee details saved:", savedDetails);
 
     // Send email to company email
     const transporter = nodemailer.createTransport({
       service: "Gmail",
       auth: {
-        user: "avishk.work@gmail.com",
-        pass: emailpassword,
+        user: process.env.EMAIL_ACCOUNT,
+        pass: process.env.EMAIL_PASSWORD,
       },
     });
 
     const mailOptions = {
-      from: "avishk.work@gmail.com",
+      from: process.env.EMAIL_ACCOUNT,
       to: companyEmail,
-      subject: "Please Fill Out the Employee Details Form",
-      text: `Hello,\n\nPlease use the following link to complete the employee details form:\n\nhttp://45.134.226.131:9102/company-response/${userId}\n\nThank you!\nYour Team`,
+      subject: "Action Required: Employee Details Form Submission",
+      html: `
+          <p>Dear ${companyName} Team,</p>
+          <p>We hope this email finds you well.</p>
+          <p>As part of our onboarding process, we kindly request you to complete the employee details form for <strong>${user.fullName}</strong> (Position: ${position}).</p>
+          <p>Please use the link below to fill out the required details:</p>
+          <p><a href="http://localhost:5173/company-response/${userId}" style="color: blue; font-weight: bold;">Complete Employee Details Form</a></p>
+          <p>We appreciate your time and cooperation. Should you have any questions or require further assistance, please do not hesitate to reach out.</p>
+          <p>Best regards,<br>Your Team</p>
+      `,
     };
 
-    await transporter.sendMail(mailOptions);
+    await transporter.sendMail(mailOptions); 
+    console.log("Email sent to:", process.env.EMAIL_PASSWORD);
 
     res.status(201).json({
       message:
@@ -72,6 +107,7 @@ const addEmployeeDetails = async (req, res) => {
       data: savedDetails,
     });
   } catch (error) {
+    console.error("Error adding employee details:", error);
     res.status(500).json({
       message: "Error processing the request.",
       error: error.message,
@@ -82,51 +118,55 @@ const addEmployeeDetails = async (req, res) => {
 // Update employee details
 const updateEmployeeDetails = async (req, res) => {
   try {
-    const { userId, employeeQualities } = req.body;
+    const {
+      userId,
+      workProject,
+      projectDescription,
+      howWorkedOnProject,
+    } = req.body;
 
     // Validation check
-    if (!userId || !employeeQualities) {
-      return res.status(400).json({ message: "All fields are required." });
+    if (!userId) {
+      return res.status(400).json({ message: "All required fields must be provided." });
     }
 
-    // Check if employee details exist for the user
+    // Find employee details
     const employeeDetails = await EmployeeDetails.findOne({ userId });
     if (!employeeDetails) {
       return res.status(404).json({ message: "Employee details not found." });
     }
 
     // Update employee details
-    employeeDetails.employeeQualities = employeeQualities;
+    if (workProject !== undefined) employeeDetails.workProject = workProject;
+    if (projectDescription !== undefined) employeeDetails.projectDescription = projectDescription;
+    if (howWorkedOnProject !== undefined) employeeDetails.howWorkedOnProject = howWorkedOnProject;
+
     const updatedDetails = await employeeDetails.save();
 
-    // Respond to the client immediately after update
+    // Respond to client immediately
     res.status(200).json({
       message: "Employee details updated successfully.",
       data: updatedDetails,
     });
 
-    // Call the personality prediction API asynchronously
+    // Async call to personality prediction API
     try {
       const response = await axios.post(
-        `${backendUrl}/recruitment-project/personality/predict-personality`,
-        { sentence: employeeQualities }
+        `${process.env.FLASH_BACKEND}/recruitment-project/personality/predict-personality`,
+        { sentence: howWorkedOnProject}
       );
 
-      // Update the employeePersonalityLevel with the response
+      console.log(response)
+
       if (response.data) {
         employeeDetails.employeePersonalityLevel = response.data;
         await employeeDetails.save();
-        console.log(
-          "Employee personality level updated successfully:",
-          response.data
-        );
+        console.log("Employee personality level updated successfully:", response.data);
       }
     } catch (apiError) {
-      console.error(
-        "Error calling personality prediction API:",
-        apiError.message
-      );
+      console.error("Error calling personality prediction API:", apiError.message);
     }
+ 
   } catch (error) {
     res.status(500).json({
       message: "Error updating employee details.",
