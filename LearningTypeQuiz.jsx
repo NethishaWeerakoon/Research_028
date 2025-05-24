@@ -124,7 +124,7 @@ const LearningTypeQuiz = () => {
     const totalQuestions = questions.length;
     const score = Math.round((correctAnswers / totalQuestions) * 100); // Score as percentage
 
-    // Determine learning type based solely on the score
+
     let learningType = "";
     if (score >= 80) {
       learningType = "Speed Type Learner";
