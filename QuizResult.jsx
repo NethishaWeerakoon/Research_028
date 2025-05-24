@@ -71,6 +71,8 @@ const QuizResults = () => {
       <div className="overflow-x-auto">
         <table className="table-auto w-full border-collapse border border-gray-300">
           <thead>
+
+            //table
             <tr className="bg-gray-100">
               <th className="px-4 py-2 border border-gray-300 text-left text-gray-600 font-semibold">Learning Type Score</th>
               <th className="px-4 py-2 border border-gray-300 text-left text-gray-600 font-semibold">Technical Quiz Score</th>
