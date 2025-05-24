@@ -161,21 +161,8 @@ const Reference = () => {
               {quizData.timeTaken.toFixed(2)} seconds
             </p>
 
-            {/* Display detailed advice based on learning type
-            {advice ? (
-              <div className="bg-blue-100 text-blue-700 p-4 rounded-md">
-                <strong>Advice:</strong> {advice.advice}
-                <ul className="mt-2 list-disc list-inside">
-                  {advice.tips.map((tip, index) => (
-                    <li key={index}>{tip}</li>
-                  ))}
-                </ul>
-              </div>
-            ) : (
-              <div className="bg-yellow-100 text-yellow-700 p-4 rounded-md">
-                <strong>Advice:</strong> No specific advice available for your learning type.
-              </div>
-            )} */}
+
+
 
             {/* Graphical representation of correct and wrong answers */}
             <div className="mt-6">
