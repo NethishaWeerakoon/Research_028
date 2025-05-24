@@ -86,7 +86,7 @@ const LearningTypeQuiz = () => {
   const startQuiz = () => {
     setQuizStarted(true);
     setStartTime(Date.now());
-    setElapsedTime(0); // Reset elapsed time
+    setElapsedTime(0); 
   };
 
   // Navigate to the next question
