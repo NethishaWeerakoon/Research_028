@@ -35,5 +35,5 @@ app.use("/api/learn", learnRoute);
 app.use("/api/notification", notificationRoute); 
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`); 
 });
