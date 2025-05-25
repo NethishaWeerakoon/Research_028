@@ -43,7 +43,7 @@ let employeeDetailsSchema = new Schema(
       type: Date,
       required: true,
     },
-    employeePersonalityLevel: {
+    employeePersonalityLevel: { 
       type: Map,
       of: String,
       default: {},
