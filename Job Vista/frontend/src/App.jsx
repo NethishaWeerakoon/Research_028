@@ -82,7 +82,6 @@ function Layout() {
           <Route path="/job-template2" element={<JobTemplate2 />} />
           <Route path="/job-template3" element={<JobTemplate3 />} />
           <Route path="/my-jobs" element={<MyJobs />} />
-
           <Route path="/dashboard/applicant/job/:jobId" element={<ApplicantResume />} />
           <Route path="/dashboard/applicant/video/:jobId" element={<ApplicantVideo />} />
           <Route path="/dashboard/applicant/recommended/:jobId" element={<ApplicantRecommended />} />
