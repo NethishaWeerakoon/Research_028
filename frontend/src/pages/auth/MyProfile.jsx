@@ -22,7 +22,7 @@ const MyProfile = () => {
           Company Response Form
         </button> */}
       </div>
-      <ResumeDetails />
+      <ResumeDetails /> 
       <CompanyDetails /> 
       <QuizResults />
     </div>
