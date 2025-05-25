@@ -22,7 +22,7 @@ mongoose
   .connect(URI, { dbName: "mydatabase" })
   .then(() => console.log("Database is connected"))
   .catch((err) => console.error("Database connection error:", err));
-
+ 
 app.use(cors());
 app.use(bodyParser.json());
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
