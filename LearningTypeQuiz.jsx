@@ -177,7 +177,7 @@ const LearningTypeQuiz = () => {
     }
   };
 
-  // Handle closing the popup and navigating to the learning progress page
+  // Handle closing the popup and navigating to the learning progress
   const handleCloseModal = () => {
     setIsPopupOpen(false);
     navigate("/learning-progress");
