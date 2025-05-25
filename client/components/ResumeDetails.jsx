@@ -18,7 +18,7 @@ const ResumeDetails = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const user = JSON.parse(localStorage.getItem("user"));
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token"); 
   const userId = user?._id;
 
   useEffect(() => {
