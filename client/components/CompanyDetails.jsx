@@ -7,7 +7,7 @@ import {
   pieArcLabelClasses,
 } from "@mui/x-charts/PieChart";
 import PersonalityDetails from "../../pages/learning/PersonalityDetails";
-
+ 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#A28CFE", "#FF6699"];
 
 const getPieChartData = (personalityLevel) => {
