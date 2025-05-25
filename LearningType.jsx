@@ -133,7 +133,7 @@ const LearningType = () => {
     const percentageScore = Number(((totalScore / 30) * 100).toFixed(2));
     setResult({ type: learningType, points: percentageScore });
 
-    // Send learningType and learningTypePoints to the backend
+    
     const user = JSON.parse(localStorage.getItem("user"));
     const token = localStorage.getItem("token");
 
