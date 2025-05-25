@@ -27,7 +27,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
-app.use("/api/users", userRoute);
+app.use("/api/users", userRoute); 
 app.use("/api/resumes", resumeRoute);
 app.use("/api/jobs", jobRoute);
 app.use("/api/employee", employeeRoute);
