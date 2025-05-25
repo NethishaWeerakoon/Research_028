@@ -24,7 +24,7 @@ export default function Home() {
 
   // Open modal
   const openModal = () => setIsOpen(true);
-
+ 
   // Close modal
   const closeModal = () => setIsOpen(false);
 
