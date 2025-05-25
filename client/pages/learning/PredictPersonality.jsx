@@ -30,5 +30,5 @@ const PredictPersonality = () => {
     </div>
   );
 };
-
+ 
 export default PredictPersonality;
