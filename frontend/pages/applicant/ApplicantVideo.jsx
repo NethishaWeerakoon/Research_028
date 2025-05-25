@@ -12,6 +12,7 @@ const ApplicantVideo = () => {
     selectedUsers: [],
     rejectedUsers: [],
     acceptedUsers: [],
+    
   });
 
   // Fetch job details and applicants together
