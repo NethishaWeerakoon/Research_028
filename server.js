@@ -32,7 +32,7 @@ app.use("/api/resumes", resumeRoute);
 app.use("/api/jobs", jobRoute);  
 app.use("/api/employee", employeeRoute);
 app.use("/api/learn", learnRoute);
-app.use("/api/notification", notificationRoute); 
+app.use("/api/notification", notificationRoute);  
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`); 
