@@ -12,3 +12,4 @@ router.put("/update-employee-details", employeeController.updateEmployeeDetails)
 router.get("/get-employee-details/:userId", employeeController.getEmployeeDetails);
 
 module.exports = router; 
+ 
