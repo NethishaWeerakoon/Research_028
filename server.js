@@ -21,7 +21,7 @@ const URI =
 mongoose
   .connect(URI, { dbName: "mydatabase" })
   .then(() => console.log("Database is connected"))
-  .catch((err) => console.error("Database connection error:", err));
+  .catch((err) => console.error("Database connection error:", err)); 
  
 app.use(cors());
 app.use(bodyParser.json());
