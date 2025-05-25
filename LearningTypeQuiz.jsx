@@ -45,7 +45,7 @@ const LearningTypeQuiz = () => {
           err.response?.data?.error ||
           err.message ||
           "Failed to load questions. Please try again.";
-        // Check if the error message matches the maximum attempt error
+        // Check if the error message matches the maximum attempt erro
         if (errorMsg === "You reached maximum attempt") {
           Swal.fire({
             icon: "error",
