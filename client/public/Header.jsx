@@ -14,7 +14,7 @@ export default function Header() {
 
   // Check localStorage for user data and token
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token"); 
     const userData = localStorage.getItem("user");
 
     if (token && userData) {
