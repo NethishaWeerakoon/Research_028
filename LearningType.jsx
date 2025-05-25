@@ -14,7 +14,7 @@ const LearningType = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // Array of questions with options for the learning type quiz
+ 
   const questions = [
     {
       id: 1,
