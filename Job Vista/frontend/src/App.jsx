@@ -56,6 +56,7 @@ function Layout() {
         {/* Protected Job Seeker Routes */}
         <Route element={<ProtectedRoute allowedRoles={["Job Seeker"]} />}>
           <Route path="/resume" element={<Resume />} />
+          
           <Route path="/create-resume" element={<CreateResume />} />
           <Route path="/resume-template1" element={<Template1 />} />
           <Route path="/resume-template2" element={<Template2 />} />
