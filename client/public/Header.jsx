@@ -22,7 +22,7 @@ export default function Header() {
       setCurrentUser(user); // Store user info in state
       fetchNotifications(user._id); // Fetch notifications for the user if token and user exist
     }
-  }, []);
+  }, []); 
 
   // Fetch notifications for the logged-in user from the API
   const fetchNotifications = async (userId) => {
