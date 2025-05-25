@@ -70,7 +70,6 @@ function Layout() {
           <Route path="/topic-select" element={<TopicSelect />} />
           <Route path="/personality-test" element={<PersonalityQuiz />} />
           <Route path="/company-details" element={<CompanyDetailsForm />} />
-          
           <Route path="/video-upload/:jobId" element={<VideoUpload />} />
           <Route path="/personality-quiz" element={<Quiz />} />
           <Route path="/personality-category" element={<PredictPersonality />} />
