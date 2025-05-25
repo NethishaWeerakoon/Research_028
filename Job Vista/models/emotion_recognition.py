@@ -75,7 +75,7 @@ class EmotionPredictor:
             
             # Get probability scores for all emotions
             emotion_scores = {
-                emotion: prob 
+                emotion: prob
                 for emotion, prob in zip(self.model.classes_, emotion_probs)
             }
             
