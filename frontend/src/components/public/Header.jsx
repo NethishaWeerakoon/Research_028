@@ -24,7 +24,7 @@ export default function Header() {
     }
   }, []);
  
-  // Fetch notifications for the logged-in user from the API
+  // Fetch notifications for the logged-in user from the API 
   const fetchNotifications = async (userId) => {
     try {
       const response = await fetch(
