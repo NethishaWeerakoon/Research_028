@@ -7,8 +7,6 @@ const Resume = require("../models/resume.model");
 const Employee = require("../models/employee.model");
 const User = require("../models/user.model");
 const Job = require("../models/job.model");
-
-
 const backendUrl = process.env.FLASH_BACKEND;
 
 // Configure AWS S3 
