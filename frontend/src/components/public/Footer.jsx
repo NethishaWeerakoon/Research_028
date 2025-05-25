@@ -22,7 +22,7 @@ export default function Footers() {
               {/* Links For Job Seeker */}
               <Footer.LinkGroup col className="text-black">
                 <Footer.Link href="#">Search Job</Footer.Link>
-                <Footer.Link href="#">CV Creation</Footer.Link>
+                <Footer.Link href="#">CV Creation</Footer.Link> 
                 <Footer.Link href="#">Job Recommendation</Footer.Link>
                 <Footer.Link href="#">Apply Jobs</Footer.Link>
               </Footer.LinkGroup>
