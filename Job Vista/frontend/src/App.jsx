@@ -59,8 +59,7 @@ function Layout() {
           <Route path="/resume-template1" element={<Template1 />} />
           <Route path="/resume-template2" element={<Template2 />} />
           <Route path="/resume-template3" element={<Template3 />} />
-          <Route path="/jobs" element={<JobList />} />
-          
+          <Route path="/jobs" element={<JobList />} />          
           <Route path="/jobs/:jobId" element={<JobDetails />} />
           <Route path="/recommended-jobs" element={<RecommendedJobs />} />
           <Route path="/applied-jobs" element={<AppliedAllJobs />} />
