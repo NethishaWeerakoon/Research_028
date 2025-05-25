@@ -36,7 +36,6 @@ import ApplicantRecommended from "./pages/applicant/ApplicantRecommended";
 import Quiz from "./pages/learning/quiz";
 import PredictPersonality from "./pages/learning/PredictPersonality";
 
- 
 function Layout() {
   const location = useLocation();
   const hideHeaderFooter = ["/sign-in", "/sign-up"].includes(location.pathname);
@@ -55,7 +54,7 @@ function Layout() {
       
         {/* Protected Job Seeker Routes */}
         <Route element={<ProtectedRoute allowedRoles={["Job Seeker"]} />}>
-          <Route path="/resume" element={<Resume />} />          
+          <Route path="/resume" element={<Resume />} />
           <Route path="/create-resume" element={<CreateResume />} />
           <Route path="/resume-template1" element={<Template1 />} />
           <Route path="/resume-template2" element={<Template2 />} />
@@ -83,6 +82,7 @@ function Layout() {
           <Route path="/job-template2" element={<JobTemplate2 />} />
           <Route path="/job-template3" element={<JobTemplate3 />} />
           <Route path="/my-jobs" element={<MyJobs />} />
+
           <Route path="/dashboard/applicant/job/:jobId" element={<ApplicantResume />} />
           <Route path="/dashboard/applicant/video/:jobId" element={<ApplicantVideo />} />
           <Route path="/dashboard/applicant/recommended/:jobId" element={<ApplicantRecommended />} />
