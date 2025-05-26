@@ -20,7 +20,6 @@ const ApplicantVideo = () => {
       const response = await axios.get(
         `${import.meta.env.VITE_API_BASE_URL}resumes/${jobId}/applicants`
       );
-      
       const { selectedUsers, rejectedUsers, acceptedUsers } = response.data;
 
       setApplicants({
