@@ -9,6 +9,7 @@ const JobTemplate2 = () => {
     email: "",
     contactNumber: "",
     description: "",
+    
     requirements: "",
   });
 
