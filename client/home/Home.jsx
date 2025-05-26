@@ -15,7 +15,7 @@ export default function Home() {
 
     if (user?.roleType === "Recruiter") {
       navigate("/my-jobs");
-    } else if (user?.roleType === "Job Seeker") {
+    } else if (user?.roleType === "Job Seeker") { 
       navigate("/resume");
     } else {
       navigate("/sign-up");
