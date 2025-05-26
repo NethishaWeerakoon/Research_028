@@ -158,6 +158,7 @@ const ApplicantRecommended = () => {
 
       <div className="overflow-x-auto bg-white shadow-2xl rounded-xl">
         <table className="w-full min-w-full border-collapse">
+        
           <thead>
             <tr className="bg-gradient-to-r from-purple-600 via-purple-700 to-purple-800">
               <th className="px-6 py-4 text-sm font-semibold tracking-wider text-left text-white uppercase border-b border-purple-500 first:rounded-tl-xl">Name</th>
