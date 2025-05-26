@@ -7,9 +7,13 @@ const Resume = require("../models/resume.model");
 const Employee = require("../models/employee.model");
 const User = require("../models/user.model");
 const Job = require("../models/job.model");
-const backendUrl = process.env.FLASH_BACKEND;
 
-// Configure AWS S3 
+// Configure AWS S3
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_SECRET_REGION,
+});
 
 // Create resume for user using PDF
 const createResumeUsingPDF = async (req, res) => {
@@ -31,10 +35,10 @@ const createResumeUsingPDF = async (req, res) => {
       const formOCR = new FormData();
       formOCR.append("file", fileBuffer, { filename: req.file.originalname });
       console.log(
-        `Calling OCR API at ${backendUrl}/recruitment-project/pdfreader/ocr_only`
+        `Calling OCR API at ${process.env.FLASH_BACKEND}/recruitment-project/pdfreader/ocr_only`
       );
       const ocrResponse = await axios.post(
-        `${backendUrl}/recruitment-project/pdfreader/ocr_only`,
+        `${process.env.FLASH_BACKEND}/recruitment-project/pdfreader/ocr_only`,
         formOCR,
         { headers: { ...formOCR.getHeaders() } }
       );
@@ -118,7 +122,7 @@ const createResumeUsingPDF = async (req, res) => {
       `Deleting existing resume from vector search API for userId: ${userId}`
     );
     const deleteResponse = await axios.delete(
-      `${backendUrl}/recruitment-project/vectorsearch/resumes/${userId}`
+      `${process.env.FLASH_BACKEND}/recruitment-project/vectorsearch/resumes/${userId}`
     );
     console.log("Vector search DELETE response:", deleteResponse.data);
     if (!deleteResponse.data.message.includes("deleted successfully")) {
@@ -142,7 +146,7 @@ const createResumeUsingPDF = async (req, res) => {
     console.log("Resume updated with resume_text in DB:", extractedContent);
 
     const externalResponse = await axios.post(
-      `${backendUrl}/recruitment-project/vectorsearch/resumes/`,
+      `${process.env.FLASH_BACKEND}/recruitment-project/vectorsearch/resumes/`,
       {
         resume_id: userId,
         resume_text: extractedContent,
@@ -230,7 +234,7 @@ const createResumeUsingText = async (req, res) => {
       `Deleting existing resume from vector search API for userId: ${userId}`
     );
     const deleteResponse = await axios.delete(
-      `${backendUrl}/recruitment-project/vectorsearch/resumes/${userId}`
+      `${process.env.FLASH_BACKEND}/recruitment-project/vectorsearch/resumes/${userId}`
     );
     console.log("Vector search DELETE response:", deleteResponse.data);
     if (!deleteResponse.data.message.includes("deleted successfully")) {
@@ -254,7 +258,7 @@ const createResumeUsingText = async (req, res) => {
     console.log("Resume updated with resume_text in DB:", extractedContent);
 
     const externalResponse = await axios.post(
-      `${backendUrl}/recruitment-project/vectorsearch/resumes/`,
+      `${process.env.FLASH_BACKEND}/recruitment-project/vectorsearch/resumes/`,
       {
         resume_id: userId,
         resume_text: extractedContent,
@@ -296,7 +300,7 @@ const searchResumes = async (req, res) => {
   }
   try {
     const response = await axios.post(
-      `${backendUrl}/recruitment-project/vectorsearch/resumes/search/`,
+      `${process.env.FLASH_BACKEND}/recruitment-project/vectorsearch/resumes/search/`,
       { query_text, n_results }
     );
     const resumeData = response.data.map((resume) => ({
@@ -396,7 +400,7 @@ const uploadVideo = async (req, res) => {
 
         // Call emotion prediction API asynchronously
         const emotionResponse = await axios.post(
-          `${backendUrl}/recruitment-project/emotion/predict-emotion`,
+          `${process.env.FLASH_BACKEND}/recruitment-project/emotion/predict-emotion`,
           { s3_link: data.Location }
         );
 
@@ -468,7 +472,7 @@ const updatePersonalityText = async (req, res) => {
     let personalityPrediction;
     try {
       const response = await axios.post(
-        `${backendUrl}/recruitment-project/personality/predict-personality`,
+        `${process.env.FLASH_BACKEND}/recruitment-project/personality/predict-personality`,
         { sentence: personalityText }
       );
       personalityPrediction = response.data;
@@ -505,7 +509,7 @@ const searchRecommendedResume = async (req, res) => {
       n_results: 10,
     };
     const vectorSearchResponse = await axios.post(
-      `${backendUrl}/recruitment-project/vectorsearch/resumes/search/`,
+      `${process.env.FLASH_BACKEND}/recruitment-project/vectorsearch/resumes/search/`,
       payload,
       { headers: { "Content-Type": "application/json" } }
     );
@@ -519,7 +523,7 @@ const searchRecommendedResume = async (req, res) => {
             return {
               ...job,
               fullname: null,
-              s3CVLink: null,
+              filename: null,
               s3VideoLinks: null,
               emotionalLevel: null,
               personalityLevel: null,
@@ -531,7 +535,7 @@ const searchRecommendedResume = async (req, res) => {
             return {
               ...job,
               fullname: null,
-              s3CVLink: null,
+              filename: null,
               s3VideoLinks: null,
               emotionalLevel: null,
               personalityLevel: null,
@@ -544,7 +548,7 @@ const searchRecommendedResume = async (req, res) => {
           return {
             ...job,
             fullname: user.fullName,
-            s3CVLink: resume.s3CVLink || null,
+            filename: resume.filename || null,
             s3VideoLinks: resume.s3VideoLinks || null,
             emotionalLevel: resume.emotionalLevel || null,
             personalityLevel: resume.personalityLevel || null,
@@ -558,7 +562,7 @@ const searchRecommendedResume = async (req, res) => {
           return {
             ...job,
             fullname: null,
-            s3CVLink: null,
+            filename: null,
             s3VideoLinks: null,
             emotionalLevel: null,
             personalityLevel: null,
@@ -659,7 +663,7 @@ const getJobApplicants = async (req, res) => {
         return {
           id: user._id,
           name: user.fullName,
-          cvLink: resume.s3CVLink || "#",
+          cvLink: resume.filename || "#",
           emotion: emotionLevel ? JSON.stringify(emotionLevel) : "N/A",
           videoLink: videoLink || "#",
         };

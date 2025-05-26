@@ -1,0 +1,1465 @@
+{
+	"info": {
+		"_postman_id": "54226fd8-54b9-45c4-bcc2-a03137c681ce",
+		"name": "RECRUITMENT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33157688"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"item": [
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"avishka@gmail.com\",\r\n  \"password\": \"avishka\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apply for Job",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"6793175f3a01f035b3ec0ec8\",\r\n  \"jobId\": \"67931979da2ca5bb2e7779da\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/users/apply-job",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"apply-job"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View applied Jobs",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"6793137247a9178603526b24\",\r\n  \"jobId\": \"67931948da2ca5bb2e7779d6\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/users/applied-jobs/6793137247a9178603526b24",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"applied-jobs",
+								"6793137247a9178603526b24"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Job",
+			"item": [
+				{
+					"name": "Create Job",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzYwNWU4OThmMjM1M2ZmNmU5ZWNkMCIsImlhdCI6MTczNTgwNzk1OSwiZXhwIjoxNzM1ODEwOTU5fQ.DDdG5pF1tJ4aRcIooGIP4bdcEUuBjkuRbHmPrxAMWuI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userId",
+									"value": "6787b1842469c1db0c36ccc9",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "exxeeee",
+									"type": "text"
+								},
+								{
+									"key": "experienceYears",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "avish@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "0779999999",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "We are glad to announce that hSenid Mobile offers internships for university students who are interested in Quality Assurance Engineering.",
+									"type": "text"
+								},
+								{
+									"key": "requirements",
+									"value": "We are glad to announce that hSenid Mobile offers internships for university students who are interested in Quality Assurance Engineering.",
+									"type": "text"
+								},
+								{
+									"key": "logo",
+									"type": "file",
+									"src": "/C:/Users/avish/OneDrive/Pictures/Wallpapers/3.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/jobs/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"jobs",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Job",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzYwNWU4OThmMjM1M2ZmNmU5ZWNkMCIsImlhdCI6MTczNTgwNzk1OSwiZXhwIjoxNzM1ODEwOTU5fQ.DDdG5pF1tJ4aRcIooGIP4bdcEUuBjkuRbHmPrxAMWuI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"jobType\": \"ui\",\r\n  \"jobCount\": 3\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/jobs/search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"jobs",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Jobs",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzYwNWU4OThmMjM1M2ZmNmU5ZWNkMCIsImlhdCI6MTczNTgwNzk1OSwiZXhwIjoxNzM1ODEwOTU5fQ.DDdG5pF1tJ4aRcIooGIP4bdcEUuBjkuRbHmPrxAMWuI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Software Engineer\",\r\n  \"experienceYears\": 3,\r\n  \"email\": \"hiring@company.com\",\r\n  \"phoneNumber\": \"+1234567890\",\r\n  \"description\": \"Looking for a skilled software engineer with experience in JavaScript and Node.js.\",\r\n  \"requirements\": \"Expert in Node.js, MongoDB, and REST APIs.\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/jobs/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"jobs",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Job",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzYwNWU4OThmMjM1M2ZmNmU5ZWNkMCIsImlhdCI6MTczNTgwNzk1OSwiZXhwIjoxNzM1ODEwOTU5fQ.DDdG5pF1tJ4aRcIooGIP4bdcEUuBjkuRbHmPrxAMWuI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Software Engineer\",\r\n  \"experienceYears\": 3,\r\n  \"email\": \"hiring@company.com\",\r\n  \"phoneNumber\": \"+1234567890\",\r\n  \"description\": \"Looking for a skilled software engineer with experience in JavaScript and Node.js.\",\r\n  \"requirements\": \"Expert in Node.js, MongoDB, and REST APIs.\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/jobs/user/6799f747fedcb361443ad0e6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"jobs",
+								"user",
+								"6799f747fedcb361443ad0e6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Single Job",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzYwNWU4OThmMjM1M2ZmNmU5ZWNkMCIsImlhdCI6MTczNTgwNzk1OSwiZXhwIjoxNzM1ODEwOTU5fQ.DDdG5pF1tJ4aRcIooGIP4bdcEUuBjkuRbHmPrxAMWuI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Software Engineer\",\r\n  \"experienceYears\": 3,\r\n  \"email\": \"hiring@company.com\",\r\n  \"phoneNumber\": \"+1234567890\",\r\n  \"description\": \"Looking for a skilled software engineer with experience in JavaScript and Node.js.\",\r\n  \"requirements\": \"Expert in Node.js, MongoDB, and REST APIs.\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/jobs/67ac16c8c91164aca8d2a3de",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"jobs",
+								"67ac16c8c91164aca8d2a3de"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Job",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzYwNWU4OThmMjM1M2ZmNmU5ZWNkMCIsImlhdCI6MTczNTgwNzk1OSwiZXhwIjoxNzM1ODEwOTU5fQ.DDdG5pF1tJ4aRcIooGIP4bdcEUuBjkuRbHmPrxAMWuI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Software Engineer Update\",\r\n  \"experienceYears\": 3,\r\n  \"email\": \"hiring@company.com\",\r\n  \"phoneNumber\": \"+1234567890\",\r\n  \"description\": \"Looking for a skilled software engineer with experience in JavaScript and Node.js.\",\r\n  \"requirements\": \"Expert in Node.js, MongoDB, and REST APIs.\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/jobs/6776600cb45643d9882f2020",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"jobs",
+								"6776600cb45643d9882f2020"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Job Stats",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzYwNWU4OThmMjM1M2ZmNmU5ZWNkMCIsImlhdCI6MTczNTgwNzk1OSwiZXhwIjoxNzM1ODEwOTU5fQ.DDdG5pF1tJ4aRcIooGIP4bdcEUuBjkuRbHmPrxAMWuI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"6793137247a9178603526b24\",\r\n  \"acceptedUsers\": false,\r\n  \"rejectedUsers\": true,\r\n  \"appliedUsers\": false,\r\n  \"selectedUsers\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/jobs/update-user-status/67931948da2ca5bb2e7779d6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"jobs",
+								"update-user-status",
+								"67931948da2ca5bb2e7779d6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Job",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzYwNWU4OThmMjM1M2ZmNmU5ZWNkMCIsImlhdCI6MTczNTgwNzk1OSwiZXhwIjoxNzM1ODEwOTU5fQ.DDdG5pF1tJ4aRcIooGIP4bdcEUuBjkuRbHmPrxAMWuI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/jobs/677a19afafa34f4ebef0a138",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"jobs",
+								"677a19afafa34f4ebef0a138"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Resume",
+			"item": [
+				{
+					"name": "Create Resume Using PDF",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZDFkNmYxZjFkNmI3Y2E1YWM2NjRjMSIsImlhdCI6MTc0MTgwNTMwMCwiZXhwIjoxNzQyNDEwMTAwfQ.wj4Gdz8ryFoJcYlB4atO3HWjo6jKKKXqawskPe6gjHY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/avish/Downloads/WhatsApp Video 2025-02-23 at 15.48.59.mp4"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/resumes/create-resume-pdf",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"resumes",
+								"create-resume-pdf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Resume Using Text",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZDFkNmYxZjFkNmI3Y2E1YWM2NjRjMSIsImlhdCI6MTc0MTgwNTMwMCwiZXhwIjoxNzQyNDEwMTAwfQ.wj4Gdz8ryFoJcYlB4atO3HWjo6jKKKXqawskPe6gjHY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/avish/Downloads/WhatsApp Video 2025-02-23 at 15.48.59.mp4"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/resumes/create-resume-pdf",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"resumes",
+								"create-resume-pdf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Recommended Resumes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzYwNWU4OThmMjM1M2ZmNmU5ZWNkMCIsImlhdCI6MTczNTgwNzk1OSwiZXhwIjoxNzM1ODEwOTU5fQ.DDdG5pF1tJ4aRcIooGIP4bdcEUuBjkuRbHmPrxAMWuI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query_text\": \"Strong foundation in Computer Science and Object-Oriented Programming (OOP) concepts.,Hands-on experience with Spring Boot and React.,Familiarity with relational databases (e.g., PostgreSQL or MySQL) and database design principles.,Proficient in Git and version control workflows.,Knowledge of agile development methodologies and collaboration tools.,Excellent analytical and problem-solving skills.,Strong communication and teamwork skills.,Pursuing or recently completed a degree in Computer Science, Software Engineering, or a related field\",\r\n  \"n_results\": 3\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/resumes/search-recommended-resume",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"resumes",
+								"search-recommended-resume"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Video Upload S3",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzYwNWU4OThmMjM1M2ZmNmU5ZWNkMCIsImlhdCI6MTczNTg3NjI5MSwiZXhwIjoxNzM1ODc5MjkxfQ.06HUWjDzPBfKK9AeB8aNgs_n0Lrd2VQtCWbI9a3bBBw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "video",
+									"type": "file",
+									"src": "/C:/Users/avish/Downloads/WhatsApp Video 2025-02-23 at 15.48.59.mp4"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/resumes/upload-video/6793137247a9178603526b24/67931948da2ca5bb2e7779d6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"resumes",
+								"upload-video",
+								"6793137247a9178603526b24",
+								"67931948da2ca5bb2e7779d6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get OCR Content",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzYwNWU4OThmMjM1M2ZmNmU5ZWNkMCIsImlhdCI6MTczNjA1MjU4MCwiZXhwIjoxNzM2NjU3MzgwfQ.TAfmY9wivrHgb_XlJ02iNv7Hb5hIg37xjZqD_u0exdQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/resumes/ocr-content/6787b1842469c1db0c36ccc9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"resumes",
+								"ocr-content",
+								"6787b1842469c1db0c36ccc9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Documents",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzYwNWU4OThmMjM1M2ZmNmU5ZWNkMCIsImlhdCI6MTczNTgwNzk1OSwiZXhwIjoxNzM1ODEwOTU5fQ.DDdG5pF1tJ4aRcIooGIP4bdcEUuBjkuRbHmPrxAMWuI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/avish/Downloads/Industry manager resume.pdf"
+								},
+								{
+									"key": "userId",
+									"value": "677605e898f2353ff6e9ecd0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://45.134.226.131:8000/recruitment-project/pdfreader/documents",
+							"protocol": "http",
+							"host": [
+								"45",
+								"134",
+								"226",
+								"131"
+							],
+							"port": "8000",
+							"path": [
+								"recruitment-project",
+								"pdfreader",
+								"documents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Details",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzYwNWU4OThmMjM1M2ZmNmU5ZWNkMCIsImlhdCI6MTczNTgwNzk1OSwiZXhwIjoxNzM1ODEwOTU5fQ.DDdG5pF1tJ4aRcIooGIP4bdcEUuBjkuRbHmPrxAMWuI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/avish/Downloads/Industry manager resume.pdf"
+								},
+								{
+									"key": "userId",
+									"value": "677605e898f2353ff6e9ecd0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/resumes/6799f6f5fedcb361443ad0e0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"resumes",
+								"6799f6f5fedcb361443ad0e0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Selected Job Applicants",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzYwNWU4OThmMjM1M2ZmNmU5ZWNkMCIsImlhdCI6MTczNTgwNzk1OSwiZXhwIjoxNzM1ODEwOTU5fQ.DDdG5pF1tJ4aRcIooGIP4bdcEUuBjkuRbHmPrxAMWuI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/avish/Downloads/Industry manager resume.pdf"
+								},
+								{
+									"key": "userId",
+									"value": "677605e898f2353ff6e9ecd0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/resumes/67931948da2ca5bb2e7779d6/applicants",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"resumes",
+								"67931948da2ca5bb2e7779d6",
+								"applicants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Resume",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzYwNWU4OThmMjM1M2ZmNmU5ZWNkMCIsImlhdCI6MTczNTgwNzk1OSwiZXhwIjoxNzM1ODEwOTU5fQ.DDdG5pF1tJ4aRcIooGIP4bdcEUuBjkuRbHmPrxAMWuI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query_text\": \"Software Engineer\",\r\n  \"n_results\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/resumes/search-resumes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"resumes",
+								"search-resumes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Personality Text",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzYwNWU4OThmMjM1M2ZmNmU5ZWNkMCIsImlhdCI6MTczNTgwNzk1OSwiZXhwIjoxNzM1ODEwOTU5fQ.DDdG5pF1tJ4aRcIooGIP4bdcEUuBjkuRbHmPrxAMWuI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"6787b1842469c1db0c36ccc9\",\r\n  \"personalityText\": \"I am Good Man\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/resumes/update-personality-text",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"resumes",
+								"update-personality-text"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Previous Employee Details",
+			"item": [
+				{
+					"name": "Add Employee Details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzYwNWU4OThmMjM1M2ZmNmU5ZWNkMCIsImlhdCI6MTczNTkyMzc5NCwiZXhwIjoxNzM1OTI2Nzk0fQ.4c61LaDIrMTT-Q7UKcqEJ2IAZ8BWDyAYCGNLlZNnqpw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"677605e898f2353ff6e9ecd0\",\r\n  \"position\": \"Software Engineer\",\r\n  \"registrationNumber\": \"REG12345\",\r\n  \"companyEmail\": \"avishkarathnakumara@gmail.com\",\r\n  \"companyName\": \"Tech Corp\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/employee/add-employee-details",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"employee",
+								"add-employee-details"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Company Response Form",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzYwNWU4OThmMjM1M2ZmNmU5ZWNkMCIsImlhdCI6MTczNTkyMzc5NCwiZXhwIjoxNzM1OTI2Nzk0fQ.4c61LaDIrMTT-Q7UKcqEJ2IAZ8BWDyAYCGNLlZNnqpw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"677605e898f2353ff6e9ecd0\",\r\n  \"jobTitle\": \"Software Engineer\",\r\n  \"employeeName\": \"Avishka\",\r\n  \"employeeQualities\": \"Good\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/employee/update-employee-details",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"employee",
+								"update-employee-details"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Details",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NzYwNWU4OThmMjM1M2ZmNmU5ZWNkMCIsImlhdCI6MTczNTkyMzc5NCwiZXhwIjoxNzM1OTI2Nzk0fQ.4c61LaDIrMTT-Q7UKcqEJ2IAZ8BWDyAYCGNLlZNnqpw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/employee/get-employee-details/67a79dea3a95930e6b0e3b5a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"employee",
+								"get-employee-details",
+								"67a79dea3a95930e6b0e3b5a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notification",
+			"item": [
+				{
+					"name": "Add Notification",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ODc5ODAzN2I4YTk0NTI5ZDA0ZDFmNyIsImlhdCI6MTczNzU2NTYzMSwiZXhwIjoxNzM4MTcwNDMxfQ.ZvMpOHbhL4ELdqG9e2DFufeTehg32f9X0PAVFxN5GZI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"60d9b1b3e9f6c32e10b1aabc\",\r\n  \"jobId\": \"67893080f86a93d4c11fce7e\",  \r\n  \"message\": \"Congratulations! You've been accepted for this roles.\",\r\n  \"accepted\": false \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/notification/accept-job",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"notification",
+								"accept-job"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Notification",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ODc5ODAzN2I4YTk0NTI5ZDA0ZDFmNyIsImlhdCI6MTczNzU2NTYzMSwiZXhwIjoxNzM4MTcwNDMxfQ.ZvMpOHbhL4ELdqG9e2DFufeTehg32f9X0PAVFxN5GZI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"60d9b1b3e9f6c32e10b1aabc\",\r\n  \"jobId\": \"67893080f86a93d4c11fce7e\",  \r\n  \"message\": \"Congratulations! You've been accepted for this roles.\",\r\n  \"accepted\": true \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/notification/update-status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"notification",
+								"update-status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Notification",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ODc5ODAzN2I4YTk0NTI5ZDA0ZDFmNyIsImlhdCI6MTczNzU2NTYzMSwiZXhwIjoxNzM4MTcwNDMxfQ.ZvMpOHbhL4ELdqG9e2DFufeTehg32f9X0PAVFxN5GZI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/notification/6793137247a9178603526b24",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"notification",
+								"6793137247a9178603526b24"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Learn",
+			"item": [
+				{
+					"name": "Add Learning Type",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ODc5ODAzN2I4YTk0NTI5ZDA0ZDFmNyIsImlhdCI6MTczNzU2NTYzMSwiZXhwIjoxNzM4MTcwNDMxfQ.ZvMpOHbhL4ELdqG9e2DFufeTehg32f9X0PAVFxN5GZI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"678798037b8a94529d04d1f7\",\r\n  \"learningType\": \"I am Good Man\",\r\n  \"learningTypePoints\":10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/learn/learning-type",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"learn",
+								"learning-type"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Quiestions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ODc5ODAzN2I4YTk0NTI5ZDA0ZDFmNyIsImlhdCI6MTczNzU2NTYzMSwiZXhwIjoxNzM4MTcwNDMxfQ.ZvMpOHbhL4ELdqG9e2DFufeTehg32f9X0PAVFxN5GZI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"678798037b8a94529d04d1f7\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/learn/get-questions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"learn",
+								"get-questions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Learning Type",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ODc5ODAzN2I4YTk0NTI5ZDA0ZDFmNyIsImlhdCI6MTczNzU2NTYzMSwiZXhwIjoxNzM4MTcwNDMxfQ.ZvMpOHbhL4ELdqG9e2DFufeTehg32f9X0PAVFxN5GZI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"678798037b8a94529d04d1f7\",\r\n  \"learningType\": \"update\",\r\n  \"learningTypePoints\":10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/learn//update-learning-type",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"learn",
+								"",
+								"update-learning-type"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Quiz Result",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ODc5ODAzN2I4YTk0NTI5ZDA0ZDFmNyIsImlhdCI6MTczNzU2NTYzMSwiZXhwIjoxNzM4MTcwNDMxfQ.ZvMpOHbhL4ELdqG9e2DFufeTehg32f9X0PAVFxN5GZI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"678798037b8a94529d04d1f7\",\r\n  \"score\": 91,\r\n  \"timeTaken\": 15.2,\r\n  \"correctAnswers\": 3,\r\n  \"totalQuestions\": 3,\r\n  \"learningType\": \"update\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/learn/submit-quiz",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"learn",
+								"submit-quiz"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Quiz Results",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ODc5ODAzN2I4YTk0NTI5ZDA0ZDFmNyIsImlhdCI6MTczNzU2NTYzMSwiZXhwIjoxNzM4MTcwNDMxfQ.ZvMpOHbhL4ELdqG9e2DFufeTehg32f9X0PAVFxN5GZI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"678798037b8a94529d04d1f7\",\r\n  \"score\": 91,\r\n  \"timeTaken\": 15.2,\r\n  \"correctAnswers\": 3,\r\n  \"totalQuestions\": 3\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/learn/get-quiz-results",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"learn",
+								"get-quiz-results"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Quiz Result",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ODc5ODAzN2I4YTk0NTI5ZDA0ZDFmNyIsImlhdCI6MTczNzU2NTYzMSwiZXhwIjoxNzM4MTcwNDMxfQ.ZvMpOHbhL4ELdqG9e2DFufeTehg32f9X0PAVFxN5GZI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"678798037b8a94529d04d1f7\",\r\n  \"score\": 91,\r\n  \"timeTaken\": 15.2,\r\n  \"correctAnswers\": 3,\r\n  \"totalQuestions\": 3\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/learn/get-quiz-results/6793137247a9178603526b24",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"learn",
+								"get-quiz-results",
+								"6793137247a9178603526b24"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "http://localhost:5000/api\n",
+			"value": "base",
+			"type": "string"
+		}
+	]
+}

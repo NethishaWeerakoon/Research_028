@@ -1,8 +1,10 @@
 import { useEffect, useState, useRef } from "react";
 import domtoimage from "dom-to-image";
 import template1bg from "../../assets/job/template1bg.png";
+import { useNavigate } from "react-router-dom";
 
 const JobTemplate1 = () => {
+  const navigate = useNavigate();
   const [jobData, setJobData] = useState({
     title: "",
     experience: "",
@@ -37,16 +39,16 @@ const JobTemplate1 = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-purple-100">
       {/* Job Post Section */}
       <div
         ref={jobPostRef}
-        className="max-w-3xl w-full bg-white shadow-lg rounded-lg overflow-hidden"
+        className="w-full max-w-3xl overflow-hidden bg-white rounded-lg shadow-lg"
       >
         {/* Header Section */}
-        <div className="bg-emerald-500 text-white py-6 text-center">
+        <div className="py-6 text-center text-white bg-emerald-500">
           <h1 className="text-4xl font-bold">WE ARE HIRING</h1>
-          <h2 className="text-2xl mt-2 font-semibold">{jobData.title}</h2>
+          <h2 className="mt-2 text-2xl font-semibold">{jobData.title}</h2>
         </div>
 
         {/* Main Job Information */}
@@ -57,21 +59,21 @@ const JobTemplate1 = () => {
             <p> Contact Number: {jobData.contactNumber || "N/A"}</p>
           </div>
 
-          <div className="flex flex-col text-justify mb-4">
-            <h3 className="text-xl font-semibold text-emerald-600 mb-2">
+          <div className="flex flex-col mb-4 text-justify">
+            <h3 className="mb-2 text-xl font-semibold text-emerald-600">
               Description:
             </h3>
-            <ul className="list-disc pl-5 space-y-1 text-gray-700">
+            <ul className="pl-5 space-y-1 text-gray-700 list-disc">
               {jobData.description || "Not specified"}
             </ul>
           </div>
 
           {/* Job Requirements */}
           <div className="mb-4">
-            <h3 className="text-xl font-semibold text-emerald-600 mb-2">
+            <h3 className="mb-2 text-xl font-semibold text-emerald-600">
               Requirements:
             </h3>
-            <ul className="list-disc pl-5 space-y-1 text-gray-700">
+            <ul className="pl-5 space-y-1 text-gray-700 list-disc">
               {jobData.requirements
                 ? jobData.requirements
                     .split(",")
@@ -83,7 +85,7 @@ const JobTemplate1 = () => {
 
         {/* Footer Section with Background Image */}
         <div
-          className="bg-cover bg-center text-white text-center p-6 min-h-96"
+          className="p-6 text-center text-white bg-center bg-cover min-h-96"
           style={{ backgroundImage: `url(${template1bg})` }}
         >
           <p className="text-lg font-semibold">
@@ -95,13 +97,21 @@ const JobTemplate1 = () => {
         </div>
       </div>
 
-      {/* Download Button */}
-      <button
-        onClick={downloadAsImage}
-        className="mt-6 bg-blue-600 text-white px-6 py-2 rounded-lg shadow-lg hover:bg-blue-700"
-      >
-        Download as Image
-      </button>
+      <div className="flex items-center justify-end gap-4 mt-6">
+  <button
+    onClick={() => navigate("/create-job")}
+    className="px-6 py-2 text-white bg-red-600 rounded-lg shadow-lg hover:bg-red-700"
+  >
+    Edit
+  </button>
+  <button
+    onClick={downloadAsImage}
+    className="px-6 py-2 text-white bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700"
+  >
+    Download as Image
+  </button>
+</div>
+
     </div>
   );
 };

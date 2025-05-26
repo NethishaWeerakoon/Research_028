@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import domtoimage from "dom-to-image";
-import template2bg from "../../assets/job/template2bg.png";
+import template2bg from "../../assets/job/template2bg.jpg";
 
 const JobTemplate2 = () => {
   const [jobData, setJobData] = useState({
@@ -35,21 +35,21 @@ const JobTemplate2 = () => {
     };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 text-gray-200">
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 text-gray-200 bg-purple-100">
       {/* Job Post Section */}
       <div
         ref={jobPostRef}
-        className="max-w-3xl w-full bg-gray-800 shadow-2xl rounded-lg overflow-hidden"
+        className="w-full max-w-3xl overflow-hidden bg-white rounded-lg shadow-2xl"
       >
         {/* Header Section */}
-        <div className="bg-gray-700 text-white py-6 text-center">
-          <h1 className="text-4xl font-bold text-emerald-400">WE ARE HIRING</h1>
-          <h2 className="text-2xl mt-2 font-semibold">{jobData.title}</h2>
+        <div className="py-6 text-center text-gray-800 bg-yellow-300">
+          <h1 className="text-4xl font-bold text-gray-800">WE ARE HIRING</h1>
+          <h2 className="mt-2 text-2xl font-semibold">{jobData.title}</h2>
         </div>
 
         {/* Main Job Information */}
         <div className="p-6">
-          <div className="mb-4 text-lg font-semibold">
+          <div className="mb-4 text-lg font-semibold text-gray-800">
             <p>Experience: {jobData.experience || "Not specified"}</p>
             <p>Contact Email: {jobData.email || "N/A"}</p>
             <p>Contact Number: {jobData.contactNumber || "N/A"}</p>
@@ -58,20 +58,20 @@ const JobTemplate2 = () => {
           <div className="flex flex-col gap-4">
             {/* Job Description */}
             <div className="">
-              <h3 className="text-xl font-semibold text-emerald-400 mb-2">
+              <h3 className="mb-2 text-xl font-semibold text-yellow-700">
                 Description:
               </h3>
-              <ul className="list-disc pl-5 space-y-1">
+              <ul className="pl-5 space-y-1 text-gray-800 list-disc">
                 {jobData.description}
               </ul>
             </div>
 
             {/* Job Requirements */}
             <div className="mb-4">
-              <h3 className="text-xl font-semibold text-emerald-400 mb-2">
+              <h3 className="mb-2 text-xl font-semibold text-yellow-700">
                 Requirements:
               </h3>
-              <ul className="list-disc pl-5 space-y-1">
+              <ul className="pl-5 space-y-1 text-gray-800 list-disc">
                 {jobData.requirements
                   ? jobData.requirements
                       .split(",")
@@ -84,10 +84,10 @@ const JobTemplate2 = () => {
 
         {/* Footer Section with Dark Background Image */}
         <div
-          className="bg-cover bg-center text-white text-center p-6 min-h-96"
+          className="p-6 text-center text-white bg-center bg-cover min-h-96"
           style={{ backgroundImage: `url(${template2bg})` }}
         >
-          <p className="text-lg font-semibold">
+          <p className="text-lg font-semibold text-gray-800">
             Send Your CV to{"  "}
             <span className="underline">
               {jobData.email || "example@email.com"}
@@ -99,7 +99,7 @@ const JobTemplate2 = () => {
       {/* Download Button */}
       <button
         onClick={downloadAsImage}
-        className="mt-6 bg-emerald-600 text-white px-6 py-2 rounded-lg shadow-lg hover:bg-emerald-700"
+        className="px-6 py-2 mt-6 text-white rounded-lg shadow-lg bg-emerald-600 hover:bg-emerald-700"
       >
         Download as Image
       </button>

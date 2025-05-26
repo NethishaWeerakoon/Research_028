@@ -102,23 +102,23 @@ const RecommendedJobs = () => {
           "linear-gradient(135deg, #D9D6F1 0%, #B8ACF6 48%, #EEE3FE 100%)",
       }}
     >
-      <div className="max-w-7xl mx-auto bg-white rounded-3xl shadow-xl p-10">
+      <div className="p-10 mx-auto bg-white shadow-xl max-w-7xl rounded-3xl">
         {loading ? (
-          <div className="flex flex-col justify-center items-center min-h-screen bg-indigo-100 rounded-lg shadow-lg p-10">
+          <div className="flex flex-col items-center justify-center min-h-screen p-10 bg-indigo-100 rounded-lg shadow-lg">
             <Loading />
-            <p className="text-indigo-700 text-lg mt-4 font-semibold">
+            <p className="mt-4 text-lg font-semibold text-indigo-700">
               Loading jobs, please wait...
             </p>
           </div>
         ) : (
           <>
-            <div className="mb-10 flex flex-col md:flex-row justify-between items-center gap-6">
-              <h1 className="text-4xl font-extrabold text-indigo-900 tracking-tight">
+            <div className="flex flex-col items-center justify-between gap-6 mb-10 md:flex-row">
+              <h1 className="text-4xl font-extrabold tracking-tight text-indigo-900">
                 Recommended Jobs
               </h1>
               <button
                 onClick={() => navigate("/jobs")}
-                className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-7 rounded-lg shadow-lg transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-400"
+                className="py-3 font-semibold text-white transition transform bg-indigo-600 rounded-lg shadow-lg hover:bg-indigo-700 px-7 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-400"
                 aria-label="View All Jobs"
               >
                 View All Jobs
@@ -126,12 +126,12 @@ const RecommendedJobs = () => {
             </div>
 
             {error && (
-              <p className="text-red-600 mb-6 text-center font-semibold">
+              <p className="mb-6 font-semibold text-center text-red-600">
                 {error}
               </p>
             )}
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {jobs.length > 0 ? (
                 jobs.map((job) => (
                   <article
@@ -141,37 +141,37 @@ const RecommendedJobs = () => {
                     onKeyDown={(e) => {
                       if (e.key === "Enter") handleJobClick(job._id);
                     }}
-                    className="bg-indigo-50 p-6 rounded-2xl shadow-md cursor-pointer hover:shadow-2xl transition-shadow duration-300 flex flex-col"
+                    className="flex flex-col p-6 transition-shadow duration-300 shadow-md cursor-pointer bg-indigo-50 rounded-2xl hover:shadow-2xl"
                     aria-label={`Job: ${job.title}`}
                   >
                     <div className="flex justify-center mb-6">
                       <img
                         src={job.logo}
                         alt={`${job.title} company logo`}
-                        className="h-40 object-contain rounded-xl"
+                        className="object-contain h-40 rounded-xl"
                         loading="lazy"
                       />
                     </div>
 
-                    <h2 className="text-2xl font-semibold text-indigo-900 mb-2 truncate">
+                    <h2 className="mb-2 text-2xl font-semibold text-indigo-900 truncate">
                       {job.title}
                     </h2>
-                    <p className="text-gray-700 flex-grow mb-4 leading-relaxed">
+                    <p className="flex-grow mb-4 leading-relaxed text-gray-700">
                       {truncateDescription(job.description)}
                     </p>
-                    <p className="text-indigo-600 text-sm italic font-medium">
+                    <p className="text-sm italic font-medium text-indigo-600">
                       Posted on {new Date(job.createdAt).toLocaleDateString()}
                     </p>
 
                     {typeof job.distance === "number" && !isNaN(job.distance) && (
-                      <span className="mt-4 inline-block bg-indigo-100 text-indigo-700 font-semibold px-3 py-1 rounded-full text-sm self-start">
+                      <span className="self-start inline-block px-3 py-1 mt-4 text-sm font-semibold text-indigo-700 bg-indigo-100 rounded-full">
                         Match Score: {formatDistancePercentage(job.distance)}%
                       </span>
                     )}
                   </article>
                 ))
               ) : (
-                <p className="text-center text-gray-600 text-lg col-span-full">
+                <p className="text-lg text-center text-gray-600 col-span-full">
                   No jobs found.
                 </p>
               )}
@@ -180,7 +180,7 @@ const RecommendedJobs = () => {
             {/* BAR CHART SECTION */}
             {jobs.length > 0 && (
               <section className="mt-12">
-                <h2 className="text-xl font-bold text-indigo-800 mb-4">
+                <h2 className="mb-4 text-xl font-bold text-indigo-800">
                   Job Match Score Distribution
                 </h2>
                 <JobMatchScoreChart jobs={jobs} />
