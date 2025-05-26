@@ -118,6 +118,7 @@ const MyJobs = () => {
         </a>
       </div>
 
+
       {/* Search Bar */}
       <div className="mb-8">
         <div className="relative max-w-2xl mx-auto">
