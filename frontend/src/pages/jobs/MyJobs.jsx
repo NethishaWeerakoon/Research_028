@@ -104,54 +104,98 @@ const MyJobs = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen p-6 bg-gradient-to-br from-purple-50 to-purple-100">
       {/* Header */}
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-semibold text-blue-700">MY JOBS</h1>
+      <div className="flex flex-col items-start justify-between mb-8 space-y-4 md:flex-row md:space-y-0 md:items-center">
+        <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 sm:text-4xl">
+          My Job Postings
+        </h1>
         <a
           href="/create-job"
-          className="bg-gray-300 hover:bg-gray-400 text-black font-semibold py-3 px-6 rounded-lg shadow-md"
+          className="px-6 py-3 text-sm font-medium tracking-wide text-white transition-all duration-300 transform rounded-lg shadow-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 hover:shadow-xl hover:-translate-y-1"
         >
-          ADD NEW JOB
+          + Add New Job
         </a>
       </div>
 
       {/* Search Bar */}
-      <div className="mb-6">
-        <input
-          type="text"
-          placeholder="Search by job title"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="p-2 border rounded w-full"
-        />
+      <div className="mb-8">
+        <div className="relative max-w-2xl mx-auto">
+          <input
+            type="text"
+            placeholder="Search by job title..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full p-3 pl-10 pr-4 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+          />
+          <svg
+            className="absolute w-5 h-5 text-gray-400 left-3 top-3.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+        </div>
       </div>
 
       {/* Job Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2">
         {filteredJobs.length > 0 ? (
           filteredJobs.map((job) => (
             <div
               key={job._id}
-              className="flex bg-white shadow-md rounded-lg overflow-hidden"
+              className="relative overflow-hidden transition-all duration-300 bg-white shadow-md rounded-xl hover:shadow-xl"
             >
-              {/* Job Image */}
-              <img
-                src={job.logo}
-                alt="Job Post"
-                className="w-40 h-40 object-cover"
-              />
+              {/* Delete Button - Top Right Corner */}
+              <button
+                onClick={() => handleDeleteJob(job._id)}
+                className="absolute z-10 p-2 text-white transition-all duration-300 bg-red-500 rounded-full shadow-lg top-3 right-3 hover:bg-red-600 hover:shadow-xl hover:scale-110 active:scale-95"
+                title="Delete Job"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                  />
+                </svg>
+              </button>
 
-              {/* Job Details */}
-              <div className="flex justify-between flex-col p-4">
-                <div>
-                  <h2 className="text-xl font-semibold">{job.title}</h2>
-                  <p className="text-gray-700">
-                    {truncateText(job.description, 20)}
-                  </p>
+              <div className="flex flex-col md:flex-row">
+                {/* Job Image */}
+                <div className="md:w-1/3">
+                  <img
+                    src={job.logo}
+                    alt="Job Post"
+                    className="object-cover w-full h-full min-h-[180px]"
+                  />
                 </div>
-                <div className="flex justify-between gap-2">
-                  <div className="flex gap-2">
+
+                {/* Job Details */}
+                <div className="flex flex-col justify-between p-5 md:w-2/3">
+                  <div>
+                    <h2 className="mb-2 text-xl font-bold text-gray-800">
+                      {job.title}
+                    </h2>
+                    <p className="text-gray-600">
+                      {truncateText(job.description, 20)}
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-3 mt-6">
                     <button
                       onClick={() =>
                         navigate(
@@ -161,9 +205,9 @@ const MyJobs = () => {
                           }
                         )
                       }
-                      className="mt-2 bg-gray-200 text-gray-800 px-4 py-1 rounded hover:bg-gray-300"
+                      className="px-5 py-3 text-sm font-bold text-purple-900 transition-all duration-300 bg-gradient-to-r from-purple-400 to-purple-300 rounded-xl hover:from-purple-300 hover:to-purple-200 hover:shadow-lg hover:shadow-purple-400/50 hover:-translate-y-1 active:scale-95"
                     >
-                      Recommended
+                      🎯 Recommended
                     </button>
                     <button
                       onClick={() =>
@@ -171,9 +215,9 @@ const MyJobs = () => {
                           state: { query_text: job.description },
                         })
                       }
-                      className="mt-2 bg-gray-200 text-gray-800 px-4 py-1 rounded hover:bg-gray-300"
+                      className="px-5 py-3 text-sm font-bold text-blue-900 transition-all duration-300 bg-gradient-to-r from-blue-400 to-cyan-300 rounded-xl hover:from-blue-300 hover:to-cyan-200 hover:shadow-lg hover:shadow-blue-400/50 hover:-translate-y-1 active:scale-95"
                     >
-                      Applicants
+                      👥 Applicants
                     </button>
 
                     <button
@@ -182,24 +226,49 @@ const MyJobs = () => {
                           state: { query_text: job.description },
                         })
                       }
-                      className="mt-2 bg-gray-200 text-gray-800 px-4 py-1 rounded hover:bg-gray-300"
+                      className="px-5 py-3 text-sm font-bold text-green-900 transition-all duration-300 bg-gradient-to-r from-green-400 to-emerald-300 rounded-xl hover:from-green-300 hover:to-emerald-200 hover:shadow-lg hover:shadow-green-400/50 hover:-translate-y-1 active:scale-95"
                     >
-                      View Video Dashboard
+                      📹 Video Dashboard
                     </button>
                   </div>
-                  <button
-                    onClick={() => handleDeleteJob(job._id)}
-                    className="mt-2 bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600 "
-                  >
-                    Delete
-                  </button>
                 </div>
               </div>
             </div>
           ))
         ) : (
-          <div className="flex min-h-screen ">
-            <p className="text-center">No jobs found</p>
+          <div className="flex items-center justify-center col-span-2 py-12">
+            <div className="p-8 text-center bg-white shadow-md rounded-xl">
+              <svg
+                className="w-16 h-16 mx-auto text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1}
+                  d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <h3 className="mt-4 text-lg font-medium text-gray-900">
+                No jobs found
+              </h3>
+              <p className="mt-1 text-gray-500">
+                {searchQuery
+                  ? "Try adjusting your search query"
+                  : "Create your first job posting"}
+              </p>
+              {!searchQuery && (
+                <a
+                  href="/create-job"
+                  className="inline-flex items-center px-4 py-2 mt-4 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700"
+                >
+                  + Add New Job
+                </a>
+              )}
+            </div>
           </div>
         )}
       </div>

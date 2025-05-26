@@ -1,0 +1,16 @@
+openai==1.55.3
+chromadb==0.5.20
+fastapi==0.115.5
+uvicorn 
+PyPDF2==3.0.1
+pypdf==5.1.0
+python-multipart 
+joblib==1.4.2
+pillow==11.0.0
+mediapipe==0.10.20
+scikit-learn==1.6.0
+moviepy==1.0.3
+tokenizers==0.21.0
+transformers==4.47.1
+torch==2.5.1
+pandas 

@@ -50,8 +50,8 @@ const ApplicantVideo = () => {
           userId: applicantId,
           jobId: jobId,
           message: accepted
-            ? "Congratulations! You've been accepted for this role."
-            : "We're sorry, but you've been rejected for this role.",
+            ? "Congratulations! You've been accepted for this role.Our hiring team will contact you shorlty"
+            : "We're sorry, but you've been rejected for this role. Thank you for interesting for the job. Please stay connect eith us for future oppurtunities",
           accepted: accepted,
         }
       );
@@ -110,49 +110,59 @@ const ApplicantVideo = () => {
   // Show a loading screen while fetching data
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <Loading />
-        <p className="text-gray-600 text-lg ml-4">Loading ...</p>
+        <p className="ml-4 text-lg text-gray-600">Loading ...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-10">
+    <div className="min-h-screen p-10 bg-purple-100">
       {/* Header */}
-      <h1 className="text-4xl font-semibold text-blue-700 mb-8">
+      <h1 className="mb-8 text-4xl font-semibold text-purple-700">
         {jobDetails?.title || "Job Title"}
       </h1>
-      <p className="text-gray-600 mb-4">
-        Accepted Users: {jobDetails?.acceptedUsers?.length || 0} | Rejected
-        Users: {jobDetails?.rejectedUsers?.length || 0}
-      </p>
+      <div className="flex items-center mb-4 space-x-4">
+  <div className="flex items-center px-3 py-1 rounded-full bg-green-50">
+    <span className="w-2 h-2 mr-2 bg-green-500 rounded-full"></span>
+    <span className="text-sm font-medium text-green-800">
+      Accepted: {jobDetails?.acceptedUsers?.length || 0}
+    </span>
+  </div>
+  <div className="flex items-center px-3 py-1 rounded-full bg-red-50">
+    <span className="w-2 h-2 mr-2 bg-red-500 rounded-full"></span>
+    <span className="text-sm font-medium text-red-800">
+      Rejected: {jobDetails?.rejectedUsers?.length || 0}
+    </span>
+  </div>
+</div>
 
       {/* Applicants Table */}
-      <div className="overflow-x-auto">
-        <table className="table-auto w-full bg-white shadow-lg rounded-lg">
-          <thead className="bg-blue-600 text-white">
-            <tr>
-              <th className="py-3 px-4 text-left">Name</th>
-              <th className="py-3 px-4 text-center">Emotion Level</th>
-              <th className="py-3 px-4 text-center">CV Link</th>
-              <th className="py-3 px-4 text-center">Video Link</th>
-              <th className="py-3 px-4 text-center">Actions</th>
+      <div className="overflow-x-auto bg-white shadow-2xl rounded-xl">
+        <table className="w-full min-w-full border-collapse">
+          <thead>
+            <tr className="bg-gradient-to-r from-purple-600 via-purple-700 to-purple-800">
+              <th className="px-6 py-4 text-sm font-semibold tracking-wider text-left text-white uppercase border-b border-purple-500 first:rounded-tl-xl">Name</th>
+              <th className="px-6 py-4 text-sm font-semibold tracking-wider text-center text-white uppercase border-b border-purple-500">Emotion Level</th>
+              <th className="px-6 py-4 text-sm font-semibold tracking-wider text-center text-white uppercase border-b border-purple-500">CV Link</th>
+              <th className="px-6 py-4 text-sm font-semibold tracking-wider text-center text-white uppercase border-b border-purple-500">Video Link</th>
+              <th className="px-6 py-4 text-sm font-semibold tracking-wider text-center text-white uppercase border-b border-purple-500 last:rounded-tr-xl">Actions</th>
             </tr>
           </thead>
 
           {/* Table Body */}
-          <tbody>
+          <tbody className="bg-white divide-y divide-gray-200">
             {/* Selected Users */}
             {applicants.selectedUsers.map((applicant, index) => (
               <tr
                 key={applicant.id}
                 className={`${
-                  index % 2 === 0 ? "bg-blue-50" : "bg-white"
-                } hover:bg-blue-100`}
+                  index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                } hover:bg-purple-50 transition-colors duration-200 ease-in-out group`}
               >
-                <td className="px-4 py-2 border">{applicant.name}</td>
-                <td className="px-4 py-2 border text-center">
+                <td className="px-6 py-4 text-sm font-medium text-gray-900 transition-colors duration-200 whitespace-nowrap group-hover:text-purple-900">{applicant.name}</td>
+                <td className="px-6 py-4 text-sm text-center">
                   {(() => {
                     try {
                       let emotionData = applicant.emotion;
@@ -200,39 +210,45 @@ const ApplicantVideo = () => {
                   })()}
                 </td>
 
-                <td className="px-4 py-2 border text-center">
+                <td className="px-6 py-4 text-sm text-center whitespace-nowrap">
                   <a
                     href={applicant.cvLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-500 underline hover:text-blue-700"
+                    className="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition-colors duration-200 bg-purple-600 border border-transparent rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
                   >
+                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
                     View CV
                   </a>
                 </td>
-                <td className="px-4 py-2 border text-center">
+                <td className="px-6 py-4 text-sm text-center whitespace-nowrap">
                   <a
                     href={applicant.videoLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-500 underline hover:text-blue-700"
+                    className="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition-colors duration-200 bg-purple-600 border border-transparent rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
                   >
+                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
                     View Video
                   </a>
                 </td>
-                <td className="px-4 py-2 border text-center">
-                  <div className="flex gap-1 justify-center">
+                <td className="px-6 py-4 text-sm text-center whitespace-nowrap">
+                  <div className="flex justify-center gap-2">
                     {/* Reject Button */}
                     <button
                       onClick={() => handleDecision(applicant.id, false)}
-                      className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600"
+                      className="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition-colors duration-200 bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                     >
                       Reject
                     </button>
                     {/* Select Button */}
                     <button
                       onClick={() => handleDecision(applicant.id, true)}
-                      className="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600"
+                      className="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition-colors duration-200 bg-green-600 border border-transparent rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                     >
                       Select
                     </button>
@@ -246,11 +262,11 @@ const ApplicantVideo = () => {
               <tr
                 key={applicant.id}
                 className={`${
-                  index % 2 === 0 ? "bg-blue-50" : "bg-white"
-                } hover:bg-blue-100`}
+                  index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                } hover:bg-purple-50 transition-colors duration-200 ease-in-out group`}
               >
-                <td className="px-4 py-2 border">{applicant.name}</td>
-                <td className="px-4 py-2 border text-center">
+                <td className="px-6 py-4 text-sm font-medium text-gray-900 transition-colors duration-200 whitespace-nowrap group-hover:text-purple-900">{applicant.name}</td>
+                <td className="px-6 py-4 text-sm text-center">
                   {(() => {
                     try {
                       let emotionData = applicant.emotion;
@@ -298,28 +314,36 @@ const ApplicantVideo = () => {
                   })()}
                 </td>
 
-                <td className="px-4 py-2 border text-center">
+                <td className="px-6 py-4 text-sm text-center whitespace-nowrap">
                   <a
                     href={applicant.cvLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-500 underline hover:text-blue-700"
+                    className="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition-colors duration-200 bg-purple-600 border border-transparent rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
                   >
+                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
                     View CV
                   </a>
                 </td>
-                <td className="px-4 py-2 border text-center">
+                <td className="px-6 py-4 text-sm text-center whitespace-nowrap">
                   <a
                     href={applicant.videoLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-500 underline hover:text-blue-700"
+                    className="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition-colors duration-200 bg-purple-600 border border-transparent rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
                   >
+                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
                     View Video
                   </a>
                 </td>
-                <td className="px-4 py-2 border text-center">
-                  <span className="text-red-500">Rejected</span>
+                <td className="px-6 py-4 text-sm text-center whitespace-nowrap">
+                  <span className="inline-flex items-center px-3 py-2 text-sm font-medium text-red-800 bg-red-100 rounded-md">
+                    Rejected
+                  </span>
                 </td>
               </tr>
             ))}
@@ -329,11 +353,11 @@ const ApplicantVideo = () => {
               <tr
                 key={applicant.id}
                 className={`${
-                  index % 2 === 0 ? "bg-blue-50" : "bg-white"
-                } hover:bg-blue-100`}
+                  index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                } hover:bg-purple-50 transition-colors duration-200 ease-in-out group`}
               >
-                <td className="px-4 py-2 border">{applicant.name}</td>
-                <td className="px-4 py-2 border text-center">
+                <td className="px-6 py-4 text-sm font-medium text-gray-900 transition-colors duration-200 whitespace-nowrap group-hover:text-purple-900">{applicant.name}</td>
+                <td className="px-6 py-4 text-sm text-center">
                   {(() => {
                     try {
                       let emotionData = applicant.emotion;
@@ -381,28 +405,36 @@ const ApplicantVideo = () => {
                   })()}
                 </td>
 
-                <td className="px-4 py-2 border text-center">
+                <td className="px-6 py-4 text-sm text-center whitespace-nowrap">
                   <a
                     href={applicant.cvLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-500 underline hover:text-blue-700"
+                    className="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition-colors duration-200 bg-purple-600 border border-transparent rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
                   >
+                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
                     View CV
                   </a>
                 </td>
-                <td className="px-4 py-2 border text-center">
+                <td className="px-6 py-4 text-sm text-center whitespace-nowrap">
                   <a
                     href={applicant.videoLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-500 underline hover:text-blue-700"
+                    className="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white transition-colors duration-200 bg-purple-600 border border-transparent rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
                   >
+                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 002 2v8a2 2 0 002 2z" />
+                    </svg>
                     View Video
                   </a>
                 </td>
-                <td className="px-4 py-2 border text-center">
-                  <span className="text-green-500">Accepted</span>
+                <td className="px-6 py-4 text-sm text-center whitespace-nowrap">
+                  <span className="inline-flex items-center px-3 py-2 text-sm font-medium text-green-800 bg-green-100 rounded-md">
+                    Accepted
+                  </span>
                 </td>
               </tr>
             ))}

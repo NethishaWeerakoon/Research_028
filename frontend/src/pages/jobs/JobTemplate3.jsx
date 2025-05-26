@@ -35,16 +35,16 @@ const JobTemplate3 = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r p-4 text-gray-900">
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 text-gray-900 bg-purple-100 bg-gradient-to-r">
       {/* Job Post Section */}
       <div
         ref={jobPostRef}
-        className="max-w-3xl w-full bg-white shadow-2xl rounded-lg overflow-hidden"
+        className="w-full max-w-3xl overflow-hidden bg-white rounded-lg shadow-2xl"
       >
         {/* Header Section */}
-        <div className="bg-gradient-to-r from-purple-600 to-blue-500 text-white py-6 text-center">
+        <div className="py-6 text-center text-white bg-gradient-to-r from-purple-600 to-blue-500">
           <h1 className="text-5xl font-bold drop-shadow-lg">WE ARE HIRING</h1>
-          <h2 className="text-3xl mt-2 font-semibold drop-shadow-md">
+          <h2 className="mt-2 text-3xl font-semibold drop-shadow-md">
             {jobData.title || "Job Title"}
           </h2>
         </div>
@@ -60,20 +60,20 @@ const JobTemplate3 = () => {
           <div className="flex flex-col gap-4">
             {/* Job Description */}
             <div className="">
-              <h3 className="text-2xl font-semibold text-purple-600 mb-2">
+              <h3 className="mb-2 text-2xl font-semibold text-purple-600">
                 Description:
               </h3>
-              <ul className="list-disc pl-5 space-y-2 text-gray-700">
+              <ul className="pl-5 space-y-2 text-gray-700 list-disc">
                 {jobData.description}
               </ul>
             </div>
 
             {/* Job Requirements */}
             <div>
-              <h3 className="text-2xl font-semibold text-purple-600 mb-2">
+              <h3 className="mb-2 text-2xl font-semibold text-purple-600">
                 Requirements:
               </h3>
-              <ul className="list-disc pl-5 space-y-2 text-gray-700">
+              <ul className="pl-5 space-y-2 text-gray-700 list-disc">
                 {jobData.requirements
                   ? jobData.requirements
                       .split(",")
@@ -86,10 +86,10 @@ const JobTemplate3 = () => {
 
         {/* Footer Section with Colorful Background Image */}
         <div
-          className="bg-cover bg-center text-white text-center p-6 min-h-96"
+          className="p-6 text-center text-white bg-center bg-cover min-h-96"
           style={{ backgroundImage: `url(${template3bg})` }}
         >
-          <p className="text-2xl font-bold drop-shadow-lg text-purple-600">
+          <p className="text-2xl font-bold text-purple-600 drop-shadow-lg">
             Send Your CV to{" "}
             <span className="underline">
               {jobData.email || "example@email.com"}
@@ -101,7 +101,7 @@ const JobTemplate3 = () => {
       {/* Download Button */}
       <button
         onClick={downloadAsImage}
-        className="mt-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-2 rounded-lg shadow-lg hover:from-purple-700 hover:to-pink-700"
+        className="px-6 py-2 mt-6 text-white rounded-lg shadow-lg bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-700 hover:to-pink-700"
       >
         Download as Image
       </button>

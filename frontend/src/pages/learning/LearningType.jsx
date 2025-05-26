@@ -1,23 +1,26 @@
 import { useState } from "react";
-import { Dialog } from "@headlessui/react";
+import { Dialog, Transition } from "@headlessui/react"; 
+import { Fragment } from "react"; 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2"; 
 
 const LearningType = () => {
   const [answers, setAnswers] = useState({});
   const [result, setResult] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false); 
   const navigate = useNavigate();
 
-  // Array of questions with options for the learning type assessment
+
   const questions = [
     {
       id: 1,
       text: "When learning a new concept, how quickly do you grasp it?",
       options: [
-        "I need more time and practice to fully understand",
-        "After some repetition and explanation",
-        "Instantly, by quickly understanding the key idea",
+        "I need more time and practice to fully understand", 
+        "After some repetition and explanation", 
+        "Instantly, by quickly understanding the key idea", 
       ],
     },
     {
@@ -103,13 +106,26 @@ const LearningType = () => {
     },
   ];
 
-  // Update the answers state when an option is selected
   const handleOptionChange = (questionId, value) => {
     setAnswers({ ...answers, [questionId]: value });
   };
 
-  // Calculate the learning type based on the user's answers and calculate a percentage score (max 21 = 100%)
+  // Calculate the learning type based on the user's answers and calculate a percentage score
   const calculateLearningType = async () => {
+    // Check if all questions are answered
+    if (Object.keys(answers).length !== questions.length) {
+      Swal.fire({
+        icon: "warning",
+        title: "Please Answer All Questions",
+        text: "You need to answer all questions to determine your learning type.",
+        confirmButtonText: "Got It",
+        confirmButtonColor: "#F59E0B", 
+      });
+      return;
+    }
+
+    setIsSubmitting(true); 
+
     const totalScore = Object.values(answers).reduce(
       (acc, curr) => acc + curr,
       0
@@ -117,28 +133,35 @@ const LearningType = () => {
     let learningType = "";
 
     if (totalScore >= 6 && totalScore <= 11) {
-      learningType = "Slow Type Learner";
+      learningType = "Slow Type Learner"; 
     } else if (totalScore >= 12 && totalScore <= 16) {
-      learningType = "Medium Type Learner";
-    } else if (totalScore >= 17 && totalScore <= 21) {
+      learningType = "Medium Type Learner"; 
+    } else if (totalScore >= 17 && totalScore <= 30) { 
       learningType = "Speed Type Learner";
     }
 
-    // Calculate percentage based on a maximum score of 21
-    const percentageScore = Number(((totalScore / 30) * 100).toFixed(2));
+  
+    const percentageScore = Number(((totalScore / 30) * 100).toFixed(0)); 
     setResult({ type: learningType, points: percentageScore });
     setIsPopupOpen(true);
 
-    // Get user data from localStorage
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
     const token = localStorage.getItem("token");
 
     if (!user || !user._id || !token) {
-      console.error("User not logged in or invalid data.");
+      Swal.fire({
+        icon: "error",
+        title: "Authentication Required",
+        text: "Please log in to save your learning type.",
+        confirmButtonText: "Login",
+        confirmButtonColor: "#EF4444",
+      }).then(() => {
+        navigate("/login"); 
+      });
+      setIsSubmitting(false);
       return;
     }
 
-    // Send learningType and learningTypePoints (percentage) to the backend
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_BASE_URL}learn/learning-type`,
@@ -156,8 +179,18 @@ const LearningType = () => {
       );
 
       console.log("Learning type saved successfully:", response.data);
+    
     } catch (error) {
       console.error("Error saving learning type:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Save Failed",
+        text: error.response?.data?.error || "Could not save your learning type. Please try again.",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#EF4444",
+      });
+    } finally {
+      setIsSubmitting(false); // End submission loading
     }
   };
 
@@ -170,78 +203,138 @@ const LearningType = () => {
   // Handle closing the popup and navigating based on learning type
   const handleDialogClose = () => {
     setIsPopupOpen(false);
-    navigate("/topic-select");
+    navigate("/topic-select"); 
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen p-10">
-      <h1 className="text-4xl font-semibold text-blue-700">
-        Learning Type Assessment
-      </h1>
-      <div className="space-y-6 mt-6">
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {questions.map((question) => (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-100 p-6 flex flex-col items-center font-sans">
+      <div className="w-full max-w-3xl bg-white rounded-xl shadow-2xl p-8 transform transition-all duration-300 hover:scale-[1.01] animate-fadeIn">
+        <h1 className="text-4xl font-extrabold text-center text-blue-700 mb-8 animate-fadeInDown">
+          Discover Your Learning Style! 🧠
+        </h1>
+        <p className="text-lg text-center text-gray-700 mb-10 leading-relaxed">
+          Answer these questions to understand how you learn best. This will
+          help us tailor your learning experience on the platform!
+        </p>
+
+        <form onSubmit={handleSubmit} className="space-y-8">
+          {questions.map((question, qIndex) => (
             <div
               key={question.id}
-              className="bg-white p-4 shadow-md rounded-md"
+              className="bg-gray-50 p-6 shadow-lg rounded-lg border border-gray-200 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1 animate-fadeInUp"
+              style={{ animationDelay: `${qIndex * 0.1}s` }}
             >
-              <p className="text-lg font-medium mb-3">{question.text}</p>
-              {question.options.map((option, index) => (
-                <label key={index} className="block mb-2">
-                  <input
-                    type="radio"
-                    name={`question-${question.id}`}
-                    value={index + 1}
-                    checked={answers[question.id] === index + 1}
-                    onChange={() => handleOptionChange(question.id, index + 1)}
-                    className="mr-2"
-                    required
-                  />
-                  {option}
-                </label>
-              ))}
+              <p className="text-xl font-semibold text-gray-800 mb-4">
+                {qIndex + 1}. {question.text}
+              </p>
+              <div className="space-y-3">
+                {question.options.map((option, index) => (
+                  <label
+                    key={index}
+                    className={`flex items-center p-3 rounded-md cursor-pointer transition-all duration-200 ease-in-out
+                      ${
+                        answers[question.id] === index + 1
+                          ? "bg-blue-100 border-blue-500 shadow-md text-blue-800 font-medium"
+                          : "bg-white border-gray-300 hover:bg-gray-100"
+                      }
+                      border`}
+                  >
+                    <input
+                      type="radio"
+                      name={`question-${question.id}`}
+                      value={index + 1}
+                      checked={answers[question.id] === index + 1}
+                      onChange={() => handleOptionChange(question.id, index + 1)}
+                      className="h-5 w-5 text-blue-600 focus:ring-blue-500 mr-3"
+                      required
+                    />
+                    <span className="text-base">{option}</span>
+                  </label>
+                ))}
+              </div>
             </div>
           ))}
-          <div className="flex justify-end">
+          <div className="flex justify-center mt-10">
             <button
               type="submit"
-              className="bg-blue-600 text-white py-2 px-6 rounded-lg font-medium hover:bg-blue-700"
+              disabled={isSubmitting || Object.keys(answers).length !== questions.length}
+              className={`px-10 py-4 text-xl font-bold rounded-full transition duration-300 ease-in-out transform hover:scale-105 shadow-lg
+                ${
+                  isSubmitting
+                    ? "bg-gray-400 cursor-not-allowed text-gray-700"
+                    : "bg-gradient-to-r from-green-500 to-teal-500 text-white hover:from-green-600 hover:to-teal-600"
+                }
+              `}
             >
-              Submit
+              {isSubmitting ? "Analyzing..." : "Submit My Answers"}
             </button>
           </div>
         </form>
       </div>
-      {/* Popup Dialog */}
-      {isPopupOpen && (
-        <Dialog
-          open={isPopupOpen}
-          onClose={handleDialogClose}
-          className="fixed z-10 inset-0 overflow-y-auto"
-        >
-          <div className="flex items-center justify-center min-h-screen">
-            <Dialog.Overlay className="fixed inset-0" />
-            <div className="bg-white p-6 rounded-lg shadow-lg w-96 text-center">
-              <Dialog.Title className="text-2xl font-bold mb-4">
-                Congratulations!
-              </Dialog.Title>
-              <Dialog.Description className="text-lg mb-6">
-                Your Learning Type:{" "}
-                <span className="font-semibold">{result?.type}</span>
-                <br />
-                Total Score:{" "}
-                <span className="font-semibold">{result?.points}%</span>
-              </Dialog.Description>
-              <button
-                onClick={handleDialogClose}
-                className="bg-blue-600 text-white py-2 px-6 rounded-lg font-medium hover:bg-blue-700"
+
+      <Transition appear show={isPopupOpen} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={handleDialogClose}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black bg-opacity-40" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
               >
-                Close
-              </button>
+                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-8 text-left align-middle shadow-xl transition-all border-t-4 border-blue-500">
+                  <Dialog.Title
+                    as="h3"
+                    className="text-3xl font-bold leading-6 text-gray-900 text-center flex items-center justify-center gap-2 mb-4"
+                  >
+                    Great Job! <span className="text-4xl">🎉</span>
+                  </Dialog.Title>
+                  <div className="mt-4 text-center">
+                    <p className="text-xl text-gray-700 mb-2">
+                      Based on your answers, your estimated learning style is:
+                    </p>
+                    <p className="text-4xl font-extrabold text-blue-600 animate-pulse mb-4">
+                      {result?.type}
+                    </p>
+                    <p className="text-lg text-gray-600">
+                      Your score reflects a{" "}
+                      <span className="font-semibold text-purple-600">
+                        {result?.points}%
+                      </span>{" "}
+                      tendency towards this style.
+                    </p>
+                  </div>
+
+                  <div className="mt-8 flex justify-center">
+                    <button
+                      type="button"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-6 py-3 text-lg font-medium text-white shadow-md hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition duration-200 transform hover:scale-105"
+                      onClick={handleDialogClose}
+                    >
+                      Continue to Topic Selection
+                    </button>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
             </div>
           </div>
         </Dialog>
-      )}
+      </Transition>
     </div>
   );
 };

@@ -24,6 +24,24 @@ const CreateJobPost = () => {
     "How do you prioritize your tasks when managing multiple deadlines?",
   ];
 
+  const cancelForm = () => {
+    localStorage.removeItem("TempJobPostData");
+    localStorage.removeItem("TempJobPostLogo");
+    setFormData({
+      title: "",
+      experience: "",
+      email: "",
+      contactNumber: "",
+      description: "",
+      requirements: "",
+      hrQuestions: "",
+    });
+    setLogo(null);
+    setLogoPreview(null);
+    navigate("/my-jobs");
+    window.scrollTo(0, 0);
+  };
+
   // Initialize form state with saved localStorage data
   const [formData, setFormData] = useState(() => {
     const savedData = JSON.parse(localStorage.getItem("TempJobPostData")) || {};
@@ -229,170 +247,248 @@ const CreateJobPost = () => {
 
   // Display loading state while fetching data
   return loading ? (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <Loading />
-      <p className="text-gray-600 text-lg ml-4">Loading ...</p>
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-slate-50 to-purple-50">
+      <div className="flex items-center p-8 border shadow-lg bg-white/80 backdrop-blur-sm rounded-2xl border-white/20">
+        <Loading />
+        <p className="ml-4 text-lg font-medium text-slate-600">Loading...</p>
+      </div>
     </div>
   ) : (
-    <div className="min-h-screen bg-gray-100 p-5">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-center text-3xl font-bold text-blue-700 mb-4">
-          Build Your Job Post
-        </h1>
+    <div className="min-h-screen p-6 bg-gradient-to-br from-slate-50 via-purple-50 to-indigo-50">
+      <div className="max-w-5xl mx-auto">
+        {/* Header */}
+        <div className="mb-10 text-center">
+          <h1 className="mb-3 text-4xl font-bold text-transparent bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 bg-clip-text">
+            Build Your Job Post
+          </h1>
+          <p className="text-lg text-slate-600">Create an engaging job posting to attract top talent</p>
+        </div>
 
-        <div className="grid gap-6">
-          <div className="bg-white shadow-md rounded-lg p-5">
-            <h2 className="text-xl font-semibold mb-3 text-blue-700">
-              Job Information
-            </h2>
-            <div className="flex lg:flex-col">
-              <div className="flex gap-2">
-                <div className="flex flex-col w-full">
-                  <h2 className="text-md ">Job Title</h2>
+        <div className="space-y-8">
+          {/* Job Information Card */}
+          <div className="p-8 transition-all duration-300 border shadow-lg bg-white/70 backdrop-blur-sm rounded-2xl border-white/20 hover:shadow-xl">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-2 h-8 rounded-full bg-gradient-to-b from-purple-500 to-indigo-600"></div>
+              <h2 className="text-2xl font-semibold text-slate-800">Job Information</h2>
+            </div>
+            
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                <div className="space-y-2">
+                  <label className="flex items-center gap-2 text-sm font-medium text-slate-700">
+                    <span className="w-1 h-4 bg-purple-500 rounded-full"></span>
+                    Job Title
+                  </label>
                   <input
                     type="text"
                     name="title"
-                    placeholder="Title"
+                    placeholder="Enter job title..."
                     value={formData.title}
                     onChange={handleChange}
-                    className="w-full border-gray-300 rounded-lg mb-2 p-2"
+                    className="w-full px-4 py-3 transition-all duration-200 border bg-white/50 border-slate-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-slate-400 hover:bg-white/70"
                   />
                 </div>
-                <div className="flex flex-col w-full">
-                  <h2 className="text-md ">Job Experience</h2>
+                <div className="space-y-2">
+                  <label className="flex items-center gap-2 text-sm font-medium text-slate-700">
+                    <span className="w-1 h-4 bg-indigo-500 rounded-full"></span>
+                    Experience Required
+                  </label>
                   <input
                     type="text"
                     name="experience"
-                    placeholder="Experience"
+                    placeholder="e.g., 2-5 years"
                     value={formData.experience}
                     onChange={handleChange}
-                    className="w-full border-gray-300 rounded-lg mb-2 p-2"
+                    className="w-full px-4 py-3 transition-all duration-200 border bg-white/50 border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent placeholder-slate-400 hover:bg-white/70"
                   />
                 </div>
               </div>
-              <div className="flex gap-2">
-                <div className="flex flex-col w-full">
-                  <h2 className="text-md ">Job Email</h2>
+              
+              <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                <div className="space-y-2">
+                  <label className="flex items-center gap-2 text-sm font-medium text-slate-700">
+                    <span className="w-1 h-4 bg-purple-500 rounded-full"></span>
+                    Contact Email
+                  </label>
                   <input
                     type="email"
                     name="email"
-                    placeholder="Email"
+                    placeholder="contact@company.com"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full border-gray-300 rounded-lg mb-2 p-2"
+                    className="w-full px-4 py-3 transition-all duration-200 border bg-white/50 border-slate-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-slate-400 hover:bg-white/70"
                   />
                 </div>
-                <div className="flex flex-col w-full">
-                  <h2 className="text-md ">Contact Number</h2>
+                <div className="space-y-2">
+                  <label className="flex items-center gap-2 text-sm font-medium text-slate-700">
+                    <span className="w-1 h-4 rounded-full bg-emerald-500"></span>
+                    Contact Number
+                  </label>
                   <input
                     type="text"
                     name="contactNumber"
-                    placeholder="Contact Number"
+                    placeholder="+1 (555) 123-4567"
                     value={formData.contactNumber}
                     onChange={handleChange}
-                    className="w-full border-gray-300 rounded-lg mb-2 p-2"
+                    className="w-full px-4 py-3 transition-all duration-200 border bg-white/50 border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent placeholder-slate-400 hover:bg-white/70"
                   />
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white shadow-md rounded-lg p-5">
-            <div className="flex flex-col w-full">
-              <h2 className="text-md ">Job Description</h2>
-              <textarea
-                name="description"
-                placeholder="Job Description (comma-separated)"
-                value={formData.description}
-                onChange={handleChange}
-                className="w-full border-gray-300 rounded-lg mb-2 p-2 h-60"
-              />
+          {/* Job Details Card */}
+          <div className="p-8 transition-all duration-300 border shadow-lg bg-white/70 backdrop-blur-sm rounded-2xl border-white/20 hover:shadow-xl">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-2 h-8 rounded-full bg-gradient-to-b from-emerald-500 to-teal-600"></div>
+              <h2 className="text-2xl font-semibold text-slate-800">Job Details</h2>
             </div>
-            <div className="flex flex-col w-full">
-              <h2 className="text-md ">Job Requirements</h2>
-              <textarea
-                name="requirements"
-                placeholder="Job Requirements (comma-separated)"
-                value={formData.requirements}
-                onChange={handleChange}
-                className="w-full border-gray-300 rounded-lg p-2 h-60"
-              />
-            </div>
-            <div className="flex flex-col w-full mt-4">
-              <h2 className="text-md">HR Questions</h2>
-              <textarea
-                name="hrQuestions"
-                placeholder="HR Questions (one per line)"
-                value={formData.hrQuestions}
-                onChange={handleChange}
-                className="w-full border-gray-300 rounded-lg p-2 h-60"
-                rows={10}
-              />
-              <p className="text-sm text-gray-500 mt-1">
-                Edit the HR questions above (one question per line)
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white shadow-md rounded-lg p-5 mt-4">
-          <h2 className="text-2xl font-semibold text-blue-700 mb-4">
-            Choose a Template
-          </h2>
-          <div className="grid grid-cols-3 gap-6">
-            {[template1, template2, template3].map((template, index) => (
-              <div
-                key={index}
-                className="bg-white shadow-lg rounded-lg overflow-hidden border"
-              >
-                <img
-                  src={template}
-                  alt={`Template ${index + 1}`}
-                  className="w-full  object-cover"
+            
+            <div className="space-y-6">
+              <div className="space-y-2">
+                <label className="flex items-center gap-2 text-sm font-medium text-slate-700">
+                  <span className="w-1 h-4 bg-purple-500 rounded-full"></span>
+                  Job Description
+                </label>
+                <textarea
+                  name="description"
+                  placeholder="Describe the role, responsibilities, and what makes this position exciting..."
+                  value={formData.description}
+                  onChange={handleChange}
+                  className="w-full px-4 py-4 transition-all duration-200 border resize-none bg-white/50 border-slate-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-slate-400 hover:bg-white/70"
+                  rows={8}
                 />
-                <button
-                  onClick={() => navigate(`/job-template${index + 1}`)}
-                  className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg mt-2"
-                >
-                  Select
-                </button>
               </div>
-            ))}
+              
+              <div className="space-y-2">
+                <label className="flex items-center gap-2 text-sm font-medium text-slate-700">
+                  <span className="w-1 h-4 bg-indigo-500 rounded-full"></span>
+                  Job Requirements
+                </label>
+                <textarea
+                  name="requirements"
+                  placeholder="List the key qualifications, skills, and requirements for this role..."
+                  value={formData.requirements}
+                  onChange={handleChange}
+                  className="w-full px-4 py-4 transition-all duration-200 border resize-none bg-white/50 border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent placeholder-slate-400 hover:bg-white/70"
+                  rows={8}
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <label className="flex items-center gap-2 text-sm font-medium text-slate-700">
+                  <span className="w-1 h-4 bg-purple-500 rounded-full"></span>
+                  HR Interview Questions
+                </label>
+                <textarea
+                  name="hrQuestions"
+                  placeholder="Enter interview questions (one per line)..."
+                  value={formData.hrQuestions}
+                  onChange={handleChange}
+                  className="w-full px-4 py-4 transition-all duration-200 border resize-none bg-white/50 border-slate-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-slate-400 hover:bg-white/70"
+                  rows={10}
+                />
+                <p className="flex items-center gap-2 text-sm text-slate-500">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                  </svg>
+                  Edit the HR questions above (one question per line)
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Template Selection Card */}
+          <div className="p-8 transition-all duration-300 border shadow-lg bg-white/70 backdrop-blur-sm rounded-2xl border-white/20 hover:shadow-xl">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-2 h-8 rounded-full bg-gradient-to-b from-orange-500 to-red-500"></div>
+              <h2 className="text-2xl font-semibold text-slate-800">Choose a Template</h2>
+            </div>
+            
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+              {[template1, template2, template3].map((template, index) => (
+                <div
+                  key={index}
+                  className="relative overflow-hidden transition-all duration-300 bg-white border shadow-md group rounded-xl border-slate-200 hover:shadow-xl hover:scale-105"
+                >
+                  <div className="aspect-[4/5] overflow-hidden">
+                    <img
+                      src={template}
+                      alt={`Template ${index + 1}`}
+                      className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <button
+                      onClick={() => navigate(`/job-template${index + 1}`)}
+                      className="w-full px-4 py-3 font-medium text-white transition-all duration-200 transform rounded-lg shadow-md bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 hover:scale-105 hover:shadow-lg"
+                    >
+                      Select Template {index + 1}
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* File Upload Card */}
+          <div className="p-8 transition-all duration-300 border shadow-lg bg-white/70 backdrop-blur-sm rounded-2xl border-white/20 hover:shadow-xl">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-2 h-8 rounded-full bg-gradient-to-b from-teal-500 to-cyan-600"></div>
+              <h2 className="text-2xl font-semibold text-slate-800">Upload Template</h2>
+            </div>
+            
+            <div className="space-y-4">
+              <div className="relative">
+                <input
+                  type="file"
+                  name="logo"
+                  accept="image/*"
+                  onChange={handleLogoChange}
+                  className="w-full px-4 py-3 transition-all duration-200 border cursor-pointer bg-white/50 border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-gradient-to-r file:from-teal-500 file:to-cyan-600 file:text-white file:font-medium hover:file:from-teal-600 hover:file:to-cyan-700 file:cursor-pointer hover:bg-white/70"
+                />
+              </div>
+              
+              {logoPreview && (
+                <div className="flex justify-center">
+                  <div className="relative group">
+                    <img
+                      src={logoPreview}
+                      alt="Template Preview"
+                      className="object-contain w-40 h-40 transition-all duration-200 border shadow-md border-slate-200 rounded-xl group-hover:shadow-lg"
+                    />
+                    <div className="absolute inset-0 transition-all duration-200 bg-black/0 group-hover:bg-black/10 rounded-xl"></div>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
-        <div className="bg-white shadow-md rounded-lg p-5 mt-4">
-          <h2 className="text-md">Job Template</h2>
-          <input
-            type="file"
-            name="logo"
-            accept="image/*"
-            onChange={handleLogoChange}
-            className="w-full border-gray-300 rounded-lg mb-2 p-2"
-          />
-          {logoPreview && (
-            <img
-              src={logoPreview}
-              alt="Logo Preview"
-              className="w-32 h-32 object-contain mt-2"
-            />
-          )}
-        </div>
+        {/* Action Buttons */}
+        <div className="flex flex-wrap items-center justify-end gap-4 pt-2 mt-2 border-t border-slate-200">
+  <button
+    onClick={clearLocalStorage}
+    className="px-6 py-3 font-medium text-white transition-all duration-200 transform shadow-lg bg-gradient-to-r from-red-500 to-rose-600 rounded-xl hover:from-red-600 hover:to-rose-700 hover:scale-105 hover:shadow-xl"
+  >
+    Reset Form
+  </button>
 
-        <div className="flex justify-between mt-8">
-          <button
-            onClick={clearLocalStorage}
-            className="bg-red-600 text-white px-6 py-2 rounded-lg shadow-lg hover:bg-red-700"
-          >
-            Reset Form
-          </button>
-          <button
-            onClick={handleSubmit}
-            className="bg-green-600 text-white px-6 py-2 rounded-lg shadow-lg hover:bg-green-700"
-          >
-            Publish
-          </button>
-        </div>
+  <button
+    onClick={cancelForm}
+    className="px-6 py-3 font-medium text-white transition-all duration-200 transform shadow-lg bg-gradient-to-r from-slate-500 to-slate-600 rounded-xl hover:from-slate-600 hover:to-slate-700 hover:scale-105 hover:shadow-xl"
+  >
+    Cancel
+  </button>
+
+  <button
+    onClick={handleSubmit}
+    className="px-6 py-3 font-medium text-white transition-all duration-200 transform shadow-lg bg-gradient-to-r from-emerald-500 to-green-600 rounded-xl hover:from-emerald-600 hover:to-green-700 hover:scale-105 hover:shadow-xl"
+  >
+    Publish Job Post
+  </button>
+</div>
+
       </div>
     </div>
   );

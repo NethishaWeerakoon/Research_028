@@ -141,14 +141,14 @@ const VideoUpload = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <div className="bg-white p-6 rounded-md shadow-lg w-full max-w-5xl flex flex-col lg:flex-row gap-6">
+    <div className="flex items-center justify-center min-h-screen p-4 bg-purple-100">
+      <div className="flex flex-col w-full max-w-5xl gap-6 p-6 bg-white rounded-md shadow-lg lg:flex-row">
         {/* Questions Section */}
-        <div className="bg-gray-50 p-6 rounded-lg w-full lg:w-1/2 mb-6 lg:mb-0 border">
-          <h2 className="text-2xl font-bold mb-4 text-gray-700 text-center">
+        <div className="w-full p-6 mb-6 border rounded-lg bg-gray-50 lg:w-1/2 lg:mb-0">
+          <h2 className="mb-4 text-2xl font-bold text-center text-gray-700">
             Questions
           </h2>
-          <ol className="list-decimal text-gray-600 space-y-2 pl-5">
+          <ol className="pl-5 space-y-2 text-gray-600 list-decimal">
             {hrQuestions.length > 0 ? (
               hrQuestions.map((question, index) => (
                 <li key={index}>{question}</li>
@@ -160,31 +160,31 @@ const VideoUpload = () => {
         </div>
 
         {/* Instructions and Upload Section */}
-        <div className="p-6 bg-gray-50 rounded-lg w-full lg:w-1/2 border">
-          <h2 className="text-2xl font-bold mb-4 text-gray-700 text-center">
+        <div className="w-full p-6 border rounded-lg bg-gray-50 lg:w-1/2">
+          <h2 className="mb-4 text-2xl font-bold text-center text-gray-700">
             Instructions
           </h2>
-          <p className="text-sm font-semibold text-gray-700 mb-4 text-center">
+          <p className="mb-4 text-sm font-semibold text-center text-gray-700">
             Please upload a short video clip by answering these questions.
           </p>
-          <ul className="list-decimal text-gray-600 space-y-1 pl-5 text-sm mb-6">
+          <ul className="pl-5 mb-6 space-y-1 text-sm text-gray-600 list-decimal">
             <li>Maximum duration of a video is 5 minutes.</li>
             <li>File size should not exceed 25mb.</li>
             <li>
-              Use a clean and professional background with proper lighting.
+              Use a clean and professional background with proper lighting with minimal background noise.
             </li>
             <li>
               Record using a stable camera and keep the camera at eye level.
             </li>
-            <li>Ensure there is minimal background noise.</li>
+            <li>Rename the file with "First name" and "Last name".</li>
           </ul>
 
           {/* File Upload Section */}
-          <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 flex flex-col items-center justify-center text-gray-500">
+          <div className="flex flex-col items-center justify-center p-8 text-gray-500 border-2 border-gray-300 border-dashed rounded-lg">
             <p className="mb-2 text-center text-gray-600">
               Drag & Drop files here
             </p>
-            <span className="text-gray-400 mb-4">or</span>
+            <span className="mb-4 text-gray-400">or</span>
             <input
               type="file"
               accept="video/*"
@@ -194,7 +194,7 @@ const VideoUpload = () => {
             />
             <label
               htmlFor="fileInput"
-              className="bg-blue-500 text-white px-4 py-2 rounded-md cursor-pointer hover:bg-blue-600"
+              className="px-4 py-2 text-white bg-purple-500 rounded-md cursor-pointer hover:bg-purple-600"
             >
               Browse Files
             </label>
@@ -210,22 +210,22 @@ const VideoUpload = () => {
           {/* Loading Spinner */}
           {loading && (
             <div className="flex justify-center mt-4">
-              <div className="loader border-t-4 border-blue-500 border-solid w-16 h-16 rounded-full animate-spin"></div>
+              <div className="w-16 h-16 border-t-4 border-purple-500 border-solid rounded-full loader animate-spin"></div>
             </div>
           )}
 
           {/* Buttons */}
-          <div className="flex space-x-3 mt-4">
+          <div className="flex mt-4 space-x-3">
             <button
               type="button"
-              className="px-6 py-2 rounded-md bg-gray-400 text-white hover:bg-gray-500 w-full"
+              className="w-full px-6 py-2 text-white bg-gray-400 rounded-md hover:bg-gray-500"
             >
               Cancel
             </button>
             <button
               type="button"
               onClick={handleFileUpload}
-              className="px-6 py-2 rounded-md bg-red-500 text-white hover:bg-red-600 w-full"
+              className="w-full px-6 py-2 text-white bg-red-500 rounded-md hover:bg-red-600"
             >
               Upload
             </button>
