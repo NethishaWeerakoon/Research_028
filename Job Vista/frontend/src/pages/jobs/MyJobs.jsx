@@ -79,7 +79,6 @@ const MyJobs = () => {
             confirmButtonColor: "green",
           });
         }
-        
       });
     } catch (error) {
       console.error("Error deleting job:", error);
