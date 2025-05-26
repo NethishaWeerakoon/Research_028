@@ -123,6 +123,7 @@ const ApplicantVideo = () => {
       <h1 className="mb-8 text-4xl font-semibold text-purple-700">
         {jobDetails?.title || "Job Title"}
       </h1>
+      
       <div className="flex items-center mb-4 space-x-4">
   <div className="flex items-center px-3 py-1 rounded-full bg-green-50">
     <span className="w-2 h-2 mr-2 bg-green-500 rounded-full"></span>
