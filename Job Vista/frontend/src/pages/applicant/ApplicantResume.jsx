@@ -8,7 +8,6 @@ import React, { Fragment } from 'react';
 const personalityDescriptions = {
   INFJ: {
     description: "Insightful and inspiring, INFJs have a strong sense of integrity and drive to help others.",
-    
     pros: ["Empathetic", "Organized", "Creative"],
     cons: ["Private", "Perfectionistic", "Sensitive"],
     careers: ["Psychologist", "Writer", "Counselor", "Advisor"],
