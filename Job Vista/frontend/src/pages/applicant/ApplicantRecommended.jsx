@@ -27,7 +27,6 @@ const personalityDescriptions = {
     environment: "Thrives in innovative, challenging, and autonomous settings.",
     growthTips: [
       "Be mindful of others' feelings and perspectives.",
-      
       "Practice patience with less analytical people.",
     ],
   },
