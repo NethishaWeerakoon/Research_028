@@ -12,6 +12,8 @@ const JobTemplate3 = () => {
     requirements: "",
   });
 
+  
+
   // Ref to capture the component for download
   const jobPostRef = useRef(null);
 
