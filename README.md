@@ -18,7 +18,7 @@ Personality profiling for career recommendation in computing involves assessing 
 # System Architectural Diagram
 ![Research_028](https://github.com/user-attachments/assets/db480b00-f649-444b-8443-68b45b27ef50)
 
-# Dependencies
+# Dependencies 
 
 ## List of Dependencies
 
