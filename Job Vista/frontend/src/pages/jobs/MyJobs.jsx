@@ -50,7 +50,6 @@ const MyJobs = () => {
     } else {
       setFilteredJobs(jobs);
     }
-    
   }, [searchQuery, jobs]);
 
   // Function to handle job deletion
