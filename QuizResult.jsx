@@ -40,16 +40,16 @@ const QuizResults = () => {
     return (ontroller {/dashboard}: +1ms
 [Nest] 16960  - 05/26/2025, 9:25:57 AM     LOG [RouterExplorer] Mapped {/dashboard/general-dashboard-view, GET} route +1ms
 [Nest] 16960  - 05/26/2025, 9:25:57 AM     LOG [NestApplication] Nest application successfully started +106ms  
-Frontend request - query params: {
-  page: '1',
-  limit: '1000000',
-  orderBy: 'eventId',
-  orderDirection: 'DESC',
-  startDate: 'Thu May 01 2025 00:00:00 GMT 0530 (India Standard Time)',   
-  endDate: 'Sat May 31 2025 00:00:00 GMT 0530 (India Standard Time)',     
-  status: '2',
-  offset: '-330'
-}
+// Frontend request - query params: {
+//   page: '1',
+//   limit: '1000000',
+//   orderBy: 'eventId',
+//   orderDirection: 'DESC',
+//   startDate: 'Thu May 01 2025 00:00:00 GMT 0530 (India Standard Time)',   
+//   endDate: 'Sat May 31 2025 00:00:00 GMT 0530 (India Standard Time)',     
+//   status: '2',
+//   offset: '-330'
+// }
 
       <div>
         <Loading />
