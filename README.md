@@ -18,11 +18,11 @@ Personality profiling for career recommendation in computing involves assessing 
 # System Architectural Diagram
 ![Research_028](https://github.com/user-attachments/assets/db480b00-f649-444b-8443-68b45b27ef50)
 
-# Dependencies
+# Dependencies 
 
 ## List of Dependencies
 
-### Component 1-
+### Component 1- 
 #### OpenAI - Provides APIs for generating text, images, or other outputs using AI.
 #### pydantic - A Python library for data validation and settings management. 
 #### SQLlite - Useful for storing, retrieving, and managing data without requiring a full database server.
