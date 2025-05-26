@@ -205,6 +205,7 @@ const ApplicantResume = () => {
       <h1 className="mb-8 text-4xl font-semibold text-purple-900">
         Applicant Management for {jobDetails?.title || "Job"}
       </h1>
+
       <div className="overflow-x-auto bg-white shadow-2xl rounded-xl">
         <table className="w-full min-w-full border-collapse">
           <thead>
