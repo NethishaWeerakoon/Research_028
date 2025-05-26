@@ -131,7 +131,6 @@ const ApplicantRecommended = () => {
   // Open the personality description dialog
   const openDialog = (type) => {
     setSelectedPersonality(type);
-    
     setIsOpen(true);
   };
 
